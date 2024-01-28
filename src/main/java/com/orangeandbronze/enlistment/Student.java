@@ -1,13 +1,13 @@
 package com.orangeandbronze.enlistment;
 
-class Student {
-    private final int studentNumber;
+import static org.apache.commons.lang3.Validate.isTrue;
 
-    Student(int studentNumber) {
-        if (studentNumber < 0) {
-            throw new IllegalArgumentException(
-                    "studentNumber should be non-negative, was:" + studentNumber);
-        }
-        this.studentNumber = studentNumber;
+class Student {
+    private final int studentNo;
+
+    Student(int studentNo) {
+        isTrue(studentNo >= 0,
+                "studentNumber should be non-negative, was:" + studentNo);
+        this.studentNo = studentNo;
     }
 }
