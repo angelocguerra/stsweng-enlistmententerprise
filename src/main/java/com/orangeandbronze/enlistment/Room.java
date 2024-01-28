@@ -18,6 +18,12 @@ public class Room {
         this.maxCapacity = maxCapacity;
     }
 
+    void checkForOverCapacity(int numberOfEnlisted) {
+        if (numberOfEnlisted >= maxCapacity) {
+            throw new RoomCapacityReachedException("Room " + this + " has reached max capacity of " + maxCapacity);
+        }
+    }
+
     @Override
     public String toString() {
         return roomName;
