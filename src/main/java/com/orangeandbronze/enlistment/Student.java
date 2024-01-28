@@ -1,30 +1,37 @@
 package com.orangeandbronze.enlistment;
 
-import static org.apache.commons.lang3.Validate.isTrue;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.*;
 
-/**
- * The Domain Model
- * This class contains the student's ID Number and set of sections enlisted
- */
+import static java.util.Objects.requireNonNull;
+import static org.apache.commons.lang3.Validate.*;
+
 class Student {
     private final int studentNo;
+    private final Collection<Section> sections = new HashSet<>();
 
-    /**
-     *
-     * @param studentNo - Student's id number
-     */
-    Student(int studentNo) {
-        isTrue(studentNo >= 0,
-                "studentNumber should be non-negative, was:" + studentNo);
+    Student(int studentNo, Collection<Section> sections) {
+        isTrue(studentNo >= 0, "Student number cannot be negative" + studentNo);
+        requireNonNull(sections, "Sections cannot be null");
+
         this.studentNo = studentNo;
+        this.sections.addAll(sections);
+        isTrue(!this.sections.contains(null), "Sections cannot contain null elements");
     }
 
-    /**
-     *
-     * @param o - object generated from the hashCode
-     * @return true if the student numbers match
-     */
+    Student(int studentNo) {
+        this(studentNo, Collections.emptyList());
+    }
+
+    void enlist(Section newSection) {
+        requireNonNull(newSection, "Section cannot be null");
+        sections.forEach(existingSection -> existingSection.checkForConflict(newSection));
+        sections.add(newSection);
+    }
+    Collection<Section> getSections() {
+        return new ArrayList<>(sections);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -33,21 +40,13 @@ class Student {
         return studentNo == student.studentNo;
     }
 
-    /**
-     *
-     * @return generated object that serves as the student's id number
-     */
     @Override
     public int hashCode() {
         return Objects.hash(studentNo);
     }
 
-    /**
-     *
-     * @return typecasted studentNo from object to string
-     */
     @Override
     public String toString() {
-        return "Student No.:" + studentNo;
+        return "Student# " + studentNo;
     }
 }
