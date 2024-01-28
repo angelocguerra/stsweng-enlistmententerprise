@@ -34,6 +34,14 @@ class Section {
         }
     }
 
+    int getCurrentCapacity() {
+        return currentCapacity;
+    }
+
+    void addCurrentCapacity() {
+        currentCapacity++;
+    }
+
     Schedule getSchedule() {
         return schedule;
     }
