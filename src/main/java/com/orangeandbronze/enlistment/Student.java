@@ -1,5 +1,7 @@
 package com.orangeandbronze.enlistment;
 
+import java.util.Objects;
+
 import static org.apache.commons.lang3.Validate.isTrue;
 
 class Student {
@@ -19,4 +21,8 @@ class Student {
         return studentNo == student.studentNo;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(studentNo);
+    }
 }
