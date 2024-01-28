@@ -27,6 +27,13 @@ class Section {
         this.numberOfEnlisted = 0;
     }
 
+    // New Section, with Enlisted Students
+    Section(String sectionID, Schedule schedule, Room room, int numberOfEnlisted) {
+        this(sectionID, schedule, room);
+        isTrue(numberOfEnlisted >= 0, "numberOfEnlisted cannot be negative");
+        this.numberOfEnlisted = numberOfEnlisted;
+    }
+
     void checkForConflict(Section other) {
         if (this.schedule.equals(other.getSchedule())) {
             throw new ScheduleConflictException("This section " + this + "has conflict with section " + other
