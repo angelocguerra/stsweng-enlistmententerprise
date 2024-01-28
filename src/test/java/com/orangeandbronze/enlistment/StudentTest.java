@@ -88,4 +88,23 @@ class StudentTest {
         // Exception should occur when 2nd student enlists in Section A
         assertThrows(RoomCapacityReachedException.class, () -> student2.enlist(section));
     }
+
+    @Test
+    void enlist_students_in_2_sections_with_max_capacity_sharing_the_same_room() {
+        // Given 2 students and 2 sections with same room X of capacity 1
+        Student student1 = newDefaultStudent(1);
+        Student student2 = newDefaultStudent(2);
+
+        final int CAP = 1;
+        Room X = new Room("X", CAP);
+
+        Section section1 = new Section("A", MTH_0830, X);
+        Section section2 = new Section("B", TF_1000, X);
+
+        // Both students enlist in different sections
+        student1.enlist(section1);
+        student2.enlist(section2);
+
+        // No exceptions should occur
+    }
 }
