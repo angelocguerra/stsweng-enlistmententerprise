@@ -25,4 +25,9 @@ class Student {
     public int hashCode() {
         return Objects.hash(studentNo);
     }
+
+    @Override
+    public String toString() {
+        return "Student# " + studentNo;
+    }
 }
