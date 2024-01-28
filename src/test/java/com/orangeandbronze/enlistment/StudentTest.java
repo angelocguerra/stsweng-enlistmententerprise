@@ -71,4 +71,21 @@ class StudentTest {
         // Number of students in section should be 2
         assertEquals(2, section.getNumberOfEnlisted());
     }
+
+    @Test
+    void enlist_exceeds_room_capacity() {
+        // Given 2 students and 1 section with room X of capacity 1
+        Student student1 = newDefaultStudent(1);
+        Student student2 = newDefaultStudent(2);
+
+        final int CAP = 1;
+        Room X = new Room("X", CAP);
+
+        Section section = new Section("A", MTH_0830, X);
+
+        // Both students enlist in same section
+        student1.enlist(section);
+        // Exception should occur when 2nd student enlists in Section A
+        assertThrows(RoomCapacityReachedException.class, () -> student2.enlist(section));
+    }
 }
