@@ -11,7 +11,7 @@ class Section {
     private final String sectionId;
     private final Schedule schedule;
     private final Room room;
-    private int currentCapacity;
+    private int numberOfEnlisted;
 
     // New Section, no Enlisted Students
     Section(String sectionID, Schedule schedule, Room room) {
@@ -24,7 +24,7 @@ class Section {
         this.sectionId = sectionID;
         this.schedule = schedule;
         this.room = room;
-        this.currentCapacity = 0;
+        this.numberOfEnlisted = 0;
     }
 
     void checkForConflict(Section other) {
@@ -34,12 +34,12 @@ class Section {
         }
     }
 
-    int getCurrentCapacity() {
-        return currentCapacity;
+    int getNumberOfEnlisted() {
+        return numberOfEnlisted;
     }
 
     void addCurrentCapacity() {
-        currentCapacity++;
+        numberOfEnlisted++;
     }
 
     Schedule getSchedule() {
