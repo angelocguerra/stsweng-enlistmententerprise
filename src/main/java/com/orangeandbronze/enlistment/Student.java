@@ -27,15 +27,19 @@ class Student {
         requireNonNull(newSection, "Section cannot be null");
         sections.forEach(existingSection -> existingSection.checkForConflict(newSection));
         sections.add(newSection);
+        newSection.addCurrentCapacity();
     }
+
     Collection<Section> getSections() {
         return new ArrayList<>(sections);
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Student student = (Student) o;
         return studentNo == student.studentNo;
     }
