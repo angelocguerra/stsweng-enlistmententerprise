@@ -45,7 +45,8 @@ class Section {
         return numberOfEnlisted;
     }
 
-    void addCurrentCapacity() {
+    void addNumberOfEnlisted() {
+        room.checkForOverCapacity(numberOfEnlisted);
         numberOfEnlisted++;
     }
 

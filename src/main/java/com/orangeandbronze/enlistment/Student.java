@@ -27,7 +27,7 @@ class Student {
         requireNonNull(newSection, "Section cannot be null");
         sections.forEach(existingSection -> existingSection.checkForConflict(newSection));
         sections.add(newSection);
-        newSection.addCurrentCapacity();
+        newSection.addNumberOfEnlisted();
     }
 
     Collection<Section> getSections() {
