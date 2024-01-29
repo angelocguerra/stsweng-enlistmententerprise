@@ -6,10 +6,18 @@ import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.*;
 
+/**
+ * Represents a room where classes would be held, with a maximum capacity.
+ */
 public class Room {
     private final String roomName;
     private final int maxCapacity;
 
+    /**
+     * Creates a new room with a specified name and maximum capacity.
+     * @param roomName      The name of the room.
+     * @param maxCapacity   The maximum capacity of the room.
+     */
     Room(String roomName, int maxCapacity) {
         notBlank(roomName);
         isTrue(isAlphanumeric(roomName), "roomName must be alphanumeric, was: " + roomName);
@@ -18,6 +26,10 @@ public class Room {
         this.maxCapacity = maxCapacity;
     }
 
+    /**
+     * Checks if the number of enrolled students exceeds the maximum capacity of the room.
+     * @param numberOfEnlisted  The number of students enrolled in the associated section.
+     */
     void checkForOverCapacity(int numberOfEnlisted) {
         if (numberOfEnlisted >= maxCapacity) {
             throw new RoomCapacityReachedException("Room " + this + " has reached max capacity of " + maxCapacity);

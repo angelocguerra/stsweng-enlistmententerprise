@@ -7,13 +7,22 @@ import static org.apache.commons.lang3.Validate.*;
 import static org.apache.commons.lang3.StringUtils.*;
 import java.util.Objects;
 
+/**
+ * Represents a class section with its Section ID, schedule,
+ * room, and the number of enrolled students.
+ */
 class Section {
     private final String sectionId;
     private final Schedule schedule;
     private final Room room;
     private int numberOfEnlisted;
 
-    // New Section, no Enlisted Students
+    /**
+     * Creates a new Section with no enrolled students
+     * @param sectionID     The section identifier.
+     * @param schedule      The schedule for the section.
+     * @param room          The room where section is held.
+     */
     Section(String sectionID, Schedule schedule, Room room) {
         notBlank(sectionID, "sectionID cannot be null or blank");
         isTrue(isAlphanumeric(sectionID), "sectionID must be alphanumeric, was: " + sectionID);
@@ -28,13 +37,23 @@ class Section {
         this.numberOfEnlisted = 0;
     }
 
-    // New Section, with Enlisted Students
+    /**
+     * Creates a new section with enrolled students
+     * @param sectionID         The section identifier.
+     * @param schedule          The schedule for the section.
+     * @param room              The room where section is held.
+     * @param numberOfEnlisted  The number of students already enrolled in the section.
+     */
     Section(String sectionID, Schedule schedule, Room room, int numberOfEnlisted) {
         this(sectionID, schedule, room);
         isTrue(numberOfEnlisted >= 0, "numberOfEnlisted cannot be negative");
         this.numberOfEnlisted = numberOfEnlisted;
     }
 
+    /**
+     * Checks for a schedule conflict with another section.
+     * @param other     The other section to check for conflicts.
+     */
     void checkForConflict(Section other) {
         if (this.schedule.equals(other.getSchedule())) {
             throw new ScheduleConflictException("This section " + this + "has conflict with section " + other
@@ -42,15 +61,26 @@ class Section {
         }
     }
 
+    /**
+     * Gets the number of students enrolled in the section.
+     * @return          The number of enrolled students.
+     */
     int getNumberOfEnlisted() {
         return numberOfEnlisted;
     }
 
+    /**
+     * Increases enrolled student count by one, checks for room overcapacity.
+     */
     void addNumberOfEnlisted() {
         room.checkForOverCapacity(numberOfEnlisted);
         numberOfEnlisted++;
     }
 
+    /**
+     * Gets the schedule for the section.
+     * @return      The schedule for the section.
+     */
     Schedule getSchedule() {
         return schedule;
     }
