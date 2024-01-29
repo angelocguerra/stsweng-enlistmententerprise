@@ -159,6 +159,7 @@ class StudentTest {
         Section section1 = new Section("A", MTH_0830, X);
         Section section2 = new Section("B", TF_1000, Y);
         student.enlist(section1);
-        student.cancelEnlistment(section2);
+        // assert that an exception is thrown
+        assertThrows(RuntimeException.class, () -> student.cancelEnlistment(section2));
     }
 }
