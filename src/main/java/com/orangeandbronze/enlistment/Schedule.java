@@ -8,6 +8,11 @@ class Schedule {
     private final Days days;
     private final Period period;
 
+    /**
+     * Creates a new section with enrolled students
+     * @param days      Day of schedule
+     * @param period    Period of schedule
+     */
     Schedule(Days days, Period period) {
         requireNonNull(days, "Days cannot be null");
         requireNonNull(period, "Period cannot be null");
@@ -34,10 +39,16 @@ class Schedule {
     }
 }
 
+/**
+ * possible days
+ */
 enum Days {
     MTH, TF, WS
 }
 
+/**
+ * possible periods
+ */
 enum Period {
     H0830, H1000, H1130, H1300, H1430, H1600
 }
