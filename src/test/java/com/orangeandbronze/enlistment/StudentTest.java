@@ -107,4 +107,47 @@ class StudentTest {
 
         // No exceptions should occur
     }
+
+    // CANCELLING ENLISTMENT
+    @Test
+    void student_cancels_their_only_enlisted_section() {
+        Student student = newDefaultStudent();
+        Room X = new Room("X", 10);
+        Section section = new Section("A", MTH_0830, X);
+        student.enlist(section);
+        // TODO: CANCEL ENLISTMENT
+        assertTrue(student.getSections().isEmpty());
+    }
+
+    @Test
+    void student_cancels_one_of_their_two_enlisted_sections() {
+        Student student = newDefaultStudent();
+        Room X = new Room("X", 10);
+        Room Y = new Room("Y", 10);
+        Section section1 = new Section("A", MTH_0830, X);
+        Section section2 = new Section("B", TF_1000, Y);
+        student.enlist(section1);
+        student.enlist(section2);
+        assertTrue(student.getSections().containsAll(List.of(section1, section2)));
+        // TODO: CANCEL ENLISTMENT OF ONE SECTION
+        assertFalse(student.getSections().containsAll(List.of(section1, section2)));
+
+    }
+
+    @Test
+    void student_cancels_their_only_two_enlisted_sections() {
+        Student student = newDefaultStudent();
+        Room X = new Room("X", 10);
+        Room Y = new Room("Y", 10);
+        Section section1 = new Section("A", MTH_0830, X);
+        Section section2 = new Section("B", TF_1000, Y);
+        student.enlist(section1);
+        student.enlist(section2);
+        assertTrue(student.getSections().containsAll(List.of(section1, section2)));
+        // TODO: CANCEL ENLISTMENT OF ONE SECTION
+        assertFalse(student.getSections().containsAll(List.of(section1, section2)));
+        // TODO: CANCEL ENLISTMENT OF OTHER SECTION
+        assertTrue(student.getSections().isEmpty());
+
+    }
 }

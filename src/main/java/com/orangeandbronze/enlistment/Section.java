@@ -17,6 +17,7 @@ class Section {
     Section(String sectionID, Schedule schedule, Room room) {
         notBlank(sectionID, "sectionID cannot be null or blank");
         isTrue(isAlphanumeric(sectionID), "sectionID must be alphanumeric, was: " + sectionID);
+
         requireNonNull(schedule, "Schedule cannot be null");
 
         requireNonNull(room, "Room cannot be null");
