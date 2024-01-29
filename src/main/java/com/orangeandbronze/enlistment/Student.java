@@ -36,11 +36,7 @@ class Student {
             throw new CancellingUnenlistedSectionException("Cannot cancel enlistment for a section that hasn't been enlisted");
         }
 
-        sections.forEach(existingSection -> {
-            if (existingSection.equals(other)) {
-                sections.remove(existingSection);
-            }
-        });
+        sections.remove(other);
     }
 
     Collection<Section> getSections() {
