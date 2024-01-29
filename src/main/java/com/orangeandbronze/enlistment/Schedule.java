@@ -4,6 +4,9 @@ import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Represents a schedule that has its Days and Period.
+ */
 class Schedule {
     private final Days days;
     private final Period period;
