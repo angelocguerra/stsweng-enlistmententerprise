@@ -115,7 +115,7 @@ class StudentTest {
         Room X = new Room("X", 10);
         Section section = new Section("A", MTH_0830, X);
         student.enlist(section);
-        // TODO: CANCEL ENLISTMENT
+        student.cancelEnlistment(section);
         assertTrue(student.getSections().isEmpty());
     }
 
@@ -129,7 +129,7 @@ class StudentTest {
         student.enlist(section1);
         student.enlist(section2);
         assertTrue(student.getSections().containsAll(List.of(section1, section2)));
-        // TODO: CANCEL ENLISTMENT OF ONE SECTION
+        student.cancelEnlistment(section1);
         assertFalse(student.getSections().containsAll(List.of(section1, section2)));
 
     }
@@ -144,10 +144,21 @@ class StudentTest {
         student.enlist(section1);
         student.enlist(section2);
         assertTrue(student.getSections().containsAll(List.of(section1, section2)));
-        // TODO: CANCEL ENLISTMENT OF ONE SECTION
+        student.cancelEnlistment(section1);
         assertFalse(student.getSections().containsAll(List.of(section1, section2)));
-        // TODO: CANCEL ENLISTMENT OF OTHER SECTION
+        student.cancelEnlistment(section2);
         assertTrue(student.getSections().isEmpty());
 
+    }
+
+    @Test
+    void student_cancels_enlistment_of_section_not_enlisted() {
+        Student student = newDefaultStudent();
+        Room X = new Room("X", 10);
+        Room Y = new Room("Y", 10);
+        Section section1 = new Section("A", MTH_0830, X);
+        Section section2 = new Section("B", TF_1000, Y);
+        student.enlist(section1);
+        student.cancelEnlistment(section2);
     }
 }
