@@ -10,5 +10,5 @@ An enterprise software of a Student Enlistment System.
 
 ---
 
-Created by: Angelo Guerra, Krizchelle Wong, Adrian Yung Cheng, Alina Sayo, Shem Salih, Samuel Cheng, Benson Yao, Gregory Tiong, and Josh Ang Ngo Ching<br>
+Created by: Angelo Guerra, Krizchelle Wong, Adrian Yung Cheng, Trisha Sayo, Shem Salih, Samuel Cheng, Benson Yao, Gregory Tiong, and Josh Ang Ngo Ching<br>
 Date Submitted: April 2023
