@@ -30,6 +30,19 @@ class Student {
         newSection.addNumberOfEnlisted();
     }
 
+    void cancelEnlistment(Section other) {
+        requireNonNull(other, "Section cannot be null");
+        if (!sections.contains(other)) {
+            throw new RuntimeException("Cannot cancel enlistment for a section that hasn't been enlisted");
+        }
+
+        sections.forEach(existingSection -> {
+            if (existingSection.equals(other)) {
+                sections.remove(existingSection);
+            }
+        });
+    }
+
     Collection<Section> getSections() {
         return new ArrayList<>(sections);
     }
