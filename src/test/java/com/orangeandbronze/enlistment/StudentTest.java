@@ -160,6 +160,6 @@ class StudentTest {
         Section section2 = new Section("B", TF_1000, Y);
         student.enlist(section1);
         // assert that an exception is thrown
-        assertThrows(RuntimeException.class, () -> student.cancelEnlistment(section2));
+        assertThrows(CancellingUnenlistedSectionException.class, () -> student.cancelEnlistment(section2));
     }
 }
