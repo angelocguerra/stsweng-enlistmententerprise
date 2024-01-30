@@ -1,9 +1,9 @@
 package com.orangeandbronze.enlistment;
 
-import java.util.ArrayList;
 import java.util.*;
 
 import static java.util.Objects.requireNonNull;
+
 import static org.apache.commons.lang3.Validate.*;
 
 /**
@@ -41,7 +41,9 @@ class Student {
      */
     void enlist(Section newSection) {
         requireNonNull(newSection, "Section cannot be null");
-        sections.forEach(existingSection -> existingSection.checkForConflict(newSection));
+        // loop through all existing sections, check if schedule conflicts with new section
+        sections.forEach(existingSection -> {
+            existingSection.checkForConflict(newSection); });
         sections.add(newSection);
         newSection.addNumberOfEnlisted();
     }

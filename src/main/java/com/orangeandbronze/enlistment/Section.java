@@ -1,7 +1,5 @@
 package com.orangeandbronze.enlistment;
 
-import org.apache.commons.lang3.*;
-
 import static java.util.Objects.requireNonNull;
 import static org.apache.commons.lang3.Validate.*;
 import static org.apache.commons.lang3.StringUtils.*;
