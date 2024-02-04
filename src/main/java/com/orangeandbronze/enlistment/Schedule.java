@@ -5,16 +5,16 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a schedul with specific days and periods.
+ * Represents a schedule that has its Days and Period.
  */
 class Schedule {
     private final Days days;
     private final Period period;
 
     /**
-     * Creates a schedule with the specified days and period.
-     * @param days      The days for the schedule
-     * @param period    The period for the schedule
+     * Creates a new section with enrolled students
+     * @param days      Day of schedule
+     * @param period    Period of schedule
      */
     Schedule(Days days, Period period) {
         requireNonNull(days, "Days cannot be null");

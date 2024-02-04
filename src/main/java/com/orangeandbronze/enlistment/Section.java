@@ -1,7 +1,5 @@
 package com.orangeandbronze.enlistment;
 
-import org.apache.commons.lang3.*;
-
 import static java.util.Objects.requireNonNull;
 import static org.apache.commons.lang3.Validate.*;
 import static org.apache.commons.lang3.StringUtils.*;
@@ -59,9 +57,9 @@ class Section {
      * @param other     The other section to check for conflicts.
      */
     void checkForConflict(Section other) {
-        if (this.schedule.equals(other.getSchedule())) {
+        if (this.getSchedule().equals(other.getSchedule())) {
             throw new ScheduleConflictException("This section " + this + "has conflict with section " + other
-                    + "having same schedule at " + schedule);
+                    + "having same schedule at " + this.getSchedule());
         }
     }
 
