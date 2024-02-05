@@ -16,6 +16,7 @@ class Section {
     private final Schedule schedule;
     private final Room room;
     private int numberOfEnlisted;
+    private String subjectId;
 
     /**
      * Creates a new Section with no enrolled students
