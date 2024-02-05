@@ -23,6 +23,7 @@ class Section {
      * @param sectionID     The section identifier.
      * @param schedule      The schedule for the section.
      * @param room          The room where section is held.
+     * @param subjectId     The subject identifier for the section.
      */
     Section(String sectionID, Schedule schedule, Room room, String subjectId) {
         notBlank(sectionID, "sectionID cannot be null or blank");
