@@ -162,4 +162,35 @@ class StudentTest {
         // assert that an exception is thrown
         assertThrows(CancellingUnenlistedSectionException.class, () -> student.cancelEnlistment(section2));
     }
+
+    @Test
+    void student_enlist_2_sections_with_different_subjects() {
+        Student student = newDefaultStudent();
+        Room X = new Room("X", 10);
+        Room Y = new Room("Y", 10);
+        // TODO: Edit sections to have different subjects
+        Section section1 = new Section("A", MTH_0830, X);
+        Section section2 = new Section("B", TF_1000, Y);
+
+        student.enlist(section1);
+        student.enlist(section2);
+
+        // TODO: assert that the student is enlisted in both sections
+    }
+
+    @Test
+    void student_enlist_2_sections_with_same_subjects() {
+        Student student = newDefaultStudent();
+        Room X = new Room("X", 10);
+        Room Y = new Room("Y", 10);
+
+        // TODO: Edit sections to have the same subject
+        Section section1 = new Section("A", MTH_0830, X);
+        Section section2 = new Section("B", TF_1000, Y);
+
+        student.enlist(section1);
+
+        // TODO: assert exception is thrown when the student enlists in the second
+        // section
+    }
 }
