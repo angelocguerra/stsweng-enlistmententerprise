@@ -6,11 +6,18 @@ import java.util.*;
 import static java.util.Objects.requireNonNull;
 import static org.apache.commons.lang3.Validate.*;
 
-
+/*
+ * Represents a student with a student number and their enrolled sections.
+ */
 class Student {
     private final int studentNo;
     private final Collection<Section> sections = new HashSet<>();
 
+    /**
+     * Creates a student with their own student number and sections.
+     * @param studentNo     Specific student number for each student.
+     * @param sections      The collection of sections in which a student is enrolled.
+     */
     Student(int studentNo, Collection<Section> sections) {
         isTrue(studentNo >= 0, "Student number cannot be negative" + studentNo);
         requireNonNull(sections, "Sections cannot be null");
@@ -20,10 +27,18 @@ class Student {
         isTrue(!this.sections.contains(null), "Sections cannot contain null elements");
     }
 
+    /**
+     * Creates a student with the specified student number with no enrolled sections.
+     * @param studentNo     Specific student number for each student.
+     */
     Student(int studentNo) {
         this(studentNo, Collections.emptyList());
     }
 
+    /**
+     * Enlists the student in a new section, checking for schedule conflicts with existing sections and for duplicate subject.
+     * @param newSection    The section to be enlisted.
+     */
     void enlist(Section newSection) {
         requireNonNull(newSection, "Section cannot be null");
 
@@ -39,6 +54,10 @@ class Student {
         newSection.addNumberOfEnlisted();
     }
 
+    /**
+     * Cancels the student's enlistment in a specific section
+     * @param other The section from which the student's enlistment will be canceled.
+     */
     void cancelEnlistment(Section other) {
         requireNonNull(other, "Section cannot be null");
         if (!sections.contains(other)) {
@@ -48,6 +67,10 @@ class Student {
         sections.remove(other);
     }
 
+    /**
+     * Retrieves a copy of the sections in which the student is currently enrolled.
+     * @return      A copy of the sections in which the student is enrolled.
+     */
     Collection<Section> getSections() {
         return new ArrayList<>(sections);
     }
