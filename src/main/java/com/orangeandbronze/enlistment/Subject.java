@@ -1,9 +1,6 @@
 package com.orangeandbronze.enlistment;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
+import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.isAlphanumeric;
 import static org.apache.commons.lang3.Validate.isTrue;
@@ -30,6 +27,18 @@ class Subject {
 
     Subject(String subjectId, int units, boolean isLaboratory) {
         this(subjectId, units, isLaboratory, Collections.emptyList());
+    }
+
+    double getUnits() {
+        return units;
+    }
+
+    boolean getIsLaboratory(){
+        return isLaboratory;
+    }
+
+    Collection<Subject> getprereqSubjects() {
+        return new ArrayList<>(prereqSubjects);
     }
 
     @Override
