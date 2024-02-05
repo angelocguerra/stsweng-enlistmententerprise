@@ -4,18 +4,10 @@ import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
-/**
- * Represents a schedul with specific days and periods.
- */
 class Schedule {
     private final Days days;
     private final Period period;
 
-    /**
-     * Creates a schedule with the specified days and period.
-     * @param days      The days for the schedule
-     * @param period    The period for the schedule
-     */
     Schedule(Days days, Period period) {
         requireNonNull(days, "Days cannot be null");
         requireNonNull(period, "Period cannot be null");
@@ -42,16 +34,10 @@ class Schedule {
     }
 }
 
-/**
- * Represents the days of the week for the schedule.
- */
 enum Days {
     MTH, TF, WS
 }
 
-/**
- *  Represents the different periods during the day.
- */
 enum Period {
     H0830, H1000, H1130, H1300, H1430, H1600
 }
