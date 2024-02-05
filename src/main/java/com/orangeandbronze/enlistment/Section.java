@@ -24,13 +24,15 @@ class Section {
      * @param schedule      The schedule for the section.
      * @param room          The room where section is held.
      */
-    Section(String sectionID, Schedule schedule, Room room) {
+    Section(String sectionID, Schedule schedule, Room room, String subjectId) {
         notBlank(sectionID, "sectionID cannot be null or blank");
         isTrue(isAlphanumeric(sectionID), "sectionID must be alphanumeric, was: " + sectionID);
 
         requireNonNull(schedule, "Schedule cannot be null");
 
         requireNonNull(room, "Room cannot be null");
+
+        requireNonNull(subjectId, "subjectId cannot be null");
 
         this.sectionId = sectionID;
         this.schedule = schedule;
@@ -45,8 +47,8 @@ class Section {
      * @param room              The room where section is held.
      * @param numberOfEnlisted  The number of students already enrolled in the section.
      */
-    Section(String sectionID, Schedule schedule, Room room, int numberOfEnlisted) {
-        this(sectionID, schedule, room);
+    Section(String sectionID, Schedule schedule, Room room, int numberOfEnlisted, String subjectId) {
+        this(sectionID, schedule, room, subjectId);
         isTrue(numberOfEnlisted >= 0, "numberOfEnlisted cannot be negative");
         this.numberOfEnlisted = numberOfEnlisted;
     }
