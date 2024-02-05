@@ -1,22 +1,22 @@
 package com.orangeandbronze.enlistment;
 
+import java.util.ArrayList;
 import java.util.*;
 
 import static java.util.Objects.requireNonNull;
-
 import static org.apache.commons.lang3.Validate.*;
 
 /**
- * Represents a student that is identified by its Student Number, and Sections.
+ * Represents a student with a student number and their enrolled sections.
  */
 class Student {
     private final int studentNo;
     private final Collection<Section> sections = new HashSet<>();
 
     /**
-     * Instantiate a new student with a given student number and a set of sections.
-     * @param studentNo     a unique student number
-     * @param sections      a set of sections
+     * Creates a student with their own student number and sections.
+     * @param studentNo     Specific student number for each student.
+     * @param sections      The collection of sections in which a student is enrolled.
      */
     Student(int studentNo, Collection<Section> sections) {
         isTrue(studentNo >= 0, "Student number cannot be negative" + studentNo);
@@ -28,8 +28,8 @@ class Student {
     }
 
     /**
-     * Instantiate a new student with a given student number, but with an empty section.
-     * @param studentNo     a unique student number
+     * Creates a student with the specified student number with no enrolled sections.
+     * @param studentNo     Specific student number for each student.
      */
     Student(int studentNo) {
         this(studentNo, Collections.emptyList());
@@ -42,7 +42,7 @@ class Student {
     void enlist(Section newSection) {
         requireNonNull(newSection, "Section cannot be null");
 
-        //check for schedule conflicts, loop through all existing sections, check if schedule conflicts with new section
+        //check for schedule conflicts
         sections.forEach(existingSection -> existingSection.checkForConflict(newSection));
 
         //check for duplicate subjects
@@ -68,8 +68,8 @@ class Student {
     }
 
     /**
-     * Gets a Student's Sections.
-     * @return      defensive copy of an arrayList of a student's sections
+     * Retrieves a copy of the sections in which the student is currently enrolled.
+     * @return      A copy of the sections in which the student is enrolled.
      */
     Collection<Section> getSections() {
         return new ArrayList<>(sections);

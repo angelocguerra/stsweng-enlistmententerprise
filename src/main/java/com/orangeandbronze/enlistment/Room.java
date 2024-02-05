@@ -1,14 +1,15 @@
 package com.orangeandbronze.enlistment;
 
 import static org.apache.commons.lang3.Validate.*;
-import static org.apache.commons.lang3.StringUtils.*;
 
 import java.util.Objects;
+
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Represents a room where classes would be held, with a maximum capacity.
  */
-class Room {
+public class Room {
     private final String roomName;
     private final int maxCapacity;
 
