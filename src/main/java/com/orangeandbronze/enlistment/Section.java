@@ -37,6 +37,7 @@ class Section {
         this.sectionId = sectionID;
         this.schedule = schedule;
         this.room = room;
+        this.subjectId = subjectId;
         this.numberOfEnlisted = 0;
     }
 
