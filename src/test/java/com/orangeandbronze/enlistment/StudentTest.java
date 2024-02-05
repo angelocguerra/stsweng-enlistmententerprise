@@ -25,8 +25,8 @@ class StudentTest {
         Student student = newDefaultStudent();
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section sec1 = new Section("A", MTH_0830, X);
-        Section sec2 = new Section("B", TF_1000, Y);
+        Section sec1 = new Section("A", MTH_0830, X, "GESPORT");
+        Section sec2 = new Section("B", TF_1000, Y, "GETEAMS");
 
         // When student enlists in both sections
         student.enlist(sec1);
@@ -45,8 +45,8 @@ class StudentTest {
         Student student = newDefaultStudent();
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section sec1 = new Section("A", MTH_0830, X);
-        Section sec2 = new Section("B", MTH_0830, Y);
+        Section sec1 = new Section("A", MTH_0830, X, "GESPORT");
+        Section sec2 = new Section("B", MTH_0830, Y, "GETEAMS");
 
         // When student enlists in the both sections
         student.enlist(sec1);
@@ -63,7 +63,7 @@ class StudentTest {
         final int CAP = 10;
         Room X = new Room("X", CAP);
 
-        Section section = new Section("A", MTH_0830, X);
+        Section section = new Section("A", MTH_0830, X, "GESPORT");
         // Both students enlist in same section
         student1.enlist(section);
         student2.enlist(section);
@@ -81,7 +81,7 @@ class StudentTest {
         final int CAP = 1;
         Room X = new Room("X", CAP);
 
-        Section section = new Section("A", MTH_0830, X);
+        Section section = new Section("A", MTH_0830, X, "GESPORT");
 
         // Both students enlist in same section
         student1.enlist(section);
@@ -98,8 +98,8 @@ class StudentTest {
         final int CAP = 1;
         Room X = new Room("X", CAP);
 
-        Section section1 = new Section("A", MTH_0830, X);
-        Section section2 = new Section("B", TF_1000, X);
+        Section section1 = new Section("A", MTH_0830, X, "GESPORT");
+        Section section2 = new Section("B", TF_1000, X, "GETEAMS");
 
         // Both students enlist in different sections
         student1.enlist(section1);
@@ -113,7 +113,7 @@ class StudentTest {
     void student_cancels_their_only_enlisted_section() {
         Student student = newDefaultStudent();
         Room X = new Room("X", 10);
-        Section section = new Section("A", MTH_0830, X);
+        Section section = new Section("A", MTH_0830, X, "GESPORT");
         student.enlist(section);
         student.cancelEnlistment(section);
         assertTrue(student.getSections().isEmpty());
@@ -124,8 +124,8 @@ class StudentTest {
         Student student = newDefaultStudent();
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section section1 = new Section("A", MTH_0830, X);
-        Section section2 = new Section("B", TF_1000, Y);
+        Section section1 = new Section("A", MTH_0830, X, "GESPORT");
+        Section section2 = new Section("B", TF_1000, Y, "GETEAMS");
         student.enlist(section1);
         student.enlist(section2);
         assertTrue(student.getSections().containsAll(List.of(section1, section2)));
@@ -139,8 +139,8 @@ class StudentTest {
         Student student = newDefaultStudent();
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section section1 = new Section("A", MTH_0830, X);
-        Section section2 = new Section("B", TF_1000, Y);
+        Section section1 = new Section("A", MTH_0830, X, "GESPORT");
+        Section section2 = new Section("B", TF_1000, Y, "GETEAMS");
         student.enlist(section1);
         student.enlist(section2);
         assertTrue(student.getSections().containsAll(List.of(section1, section2)));
@@ -156,8 +156,8 @@ class StudentTest {
         Student student = newDefaultStudent();
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section section1 = new Section("A", MTH_0830, X);
-        Section section2 = new Section("B", TF_1000, Y);
+        Section section1 = new Section("A", MTH_0830, X, "GESPORT");
+        Section section2 = new Section("B", TF_1000, Y, "GETEAMS");
         student.enlist(section1);
         // assert that an exception is thrown
         assertThrows(CancellingUnenlistedSectionException.class, () -> student.cancelEnlistment(section2));
@@ -168,14 +168,20 @@ class StudentTest {
         Student student = newDefaultStudent();
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        // TODO: Edit sections to have different subjects
-        Section section1 = new Section("A", MTH_0830, X);
-        Section section2 = new Section("B", TF_1000, Y);
+        // Sections with  different subjects
+        Section section1 = new Section("A", MTH_0830, X, "GESPORT");
+        Section section2 = new Section("B", TF_1000, Y, "GETEAMS");
 
         student.enlist(section1);
         student.enlist(section2);
 
-        // TODO: assert that the student is enlisted in both sections
+        // assert that the student is enlisted in both sections
+        var sections = student.getSections();
+        System.out.println("Sections: " + sections);
+        assertAll(
+                () -> assertTrue(sections.containsAll(List.of(section1, section2))),
+                () -> assertEquals(2, sections.size())
+        );
     }
 
     @Test
@@ -184,13 +190,13 @@ class StudentTest {
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
 
-        // TODO: Edit sections to have the same subject
-        Section section1 = new Section("A", MTH_0830, X);
-        Section section2 = new Section("B", TF_1000, Y);
+        // Sections with the same subject
+        Section section1 = new Section("A", MTH_0830, X, "GESPORT");
+        Section section2 = new Section("B", TF_1000, Y, "GESPORT");
 
         student.enlist(section1);
 
-        // TODO: assert exception is thrown when the student enlists in the second
-        // section
+        // assert exception is thrown when the student enlists in the second
+        assertThrows(DuplicateSubjectEnlistmentException.class, () -> student.enlist(section2));
     }
 }

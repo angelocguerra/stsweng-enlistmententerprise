@@ -65,6 +65,15 @@ class Section {
     }
 
     /**
+     * Checks if the section has the same subject as another section.
+     * @param other The other section to compare subjects.
+     * @return true if subjects are the same, false otherwise.
+     */
+    boolean hasSameSubject(Section other) {
+        return this.subjectId.equals(other.subjectId);
+    }
+
+    /**
      * Gets the number of students enrolled in the section.
      * @return          The number of enrolled students.
      */

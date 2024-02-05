@@ -6,6 +6,7 @@ import java.util.*;
 import static java.util.Objects.requireNonNull;
 import static org.apache.commons.lang3.Validate.*;
 
+
 class Student {
     private final int studentNo;
     private final Collection<Section> sections = new HashSet<>();
@@ -25,7 +26,15 @@ class Student {
 
     void enlist(Section newSection) {
         requireNonNull(newSection, "Section cannot be null");
+
+        //check for schedule conflicts
         sections.forEach(existingSection -> existingSection.checkForConflict(newSection));
+
+        //check for duplicate subjects
+        if (sections.stream().anyMatch(existingSection -> existingSection.hasSameSubject(newSection))) {
+            throw new DuplicateSubjectEnlistmentException("Cannot enlist in two sections with the same subject");
+        }
+
         sections.add(newSection);
         newSection.addNumberOfEnlisted();
     }
