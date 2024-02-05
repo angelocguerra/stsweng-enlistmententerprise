@@ -48,6 +48,7 @@ class Section {
      * @param schedule          The schedule for the section.
      * @param room              The room where section is held.
      * @param numberOfEnlisted  The number of students already enrolled in the section.
+     * @param subjectId         The subject identifier for the section.
      */
     Section(String sectionID, Schedule schedule, Room room, int numberOfEnlisted, String subjectId) {
         this(sectionID, schedule, room, subjectId);
