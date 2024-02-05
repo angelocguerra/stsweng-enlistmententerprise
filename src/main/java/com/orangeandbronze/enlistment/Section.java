@@ -69,7 +69,7 @@ class Section {
 
     /**
      * Checks if the section has the same subject as another section.
-     * @param other The other section to compare subjects.
+     * @param other     The other section to compare subjects.
      * @return true if subjects are the same, false otherwise.
      */
     boolean hasSameSubject(Section other) {
