@@ -199,4 +199,9 @@ class StudentTest {
         // assert exception is thrown when the student enlists in the second
         assertThrows(DuplicateSubjectEnlistmentException.class, () -> student.enlist(section2));
     }
+
+    @Test
+    void subject_negative_units(){
+        assertThrows(IllegalArgumentException.class, ()-> new Subject("CSARCH2", -1, true));
+    }
 }
