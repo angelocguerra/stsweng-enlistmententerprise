@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  * Represents a class section with its Section ID, schedule,
- * room, and the number of enrolled students.
+ * room, number of enrolled students, and subjectId.
  */
 class Section {
     private final String sectionId;
