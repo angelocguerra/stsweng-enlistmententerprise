@@ -205,14 +205,47 @@ class StudentTest {
     void subject_negative_units(){
         assertThrows(IllegalArgumentException.class, ()-> new Subject("CSARCH2", -1, true));
     }
-
+    @Test
     void student_enlists_in_section_with_correct_prerequisites() {
+        //declare subjects
+
+        Subject subject1_withno_prereq = new Subject("CSARCH2", 3, true);
+        Subject subject2_withno_prereq = new Subject("CSARCH3", 3, true);
+        List<Subject> subjectsTaken =  List.of(subject1_withno_prereq, subject2_withno_prereq);
+        Subject subject3_with_prereq = new Subject("CSARCH4", 3, true, List.of(subject1_withno_prereq));
+
+        Student student = new Student(2, Collections.emptyList(), subjectsTaken);
+
+        Section section_with_prereq = new Section("A", MTH_0830, new Room("X", 10), subject3_with_prereq);
+        student.enlist(section_with_prereq);
+
+
+        assertTrue(student.getSections().contains(section_with_prereq));
+
+
+
+
+
+
+
+
 
     }
 
     @Test
     void student_enlists_in_section_with_incorrect_prerequisites() {
-        Student student = newDefaultStudent();
+        Subject subject1_withno_prereq = new Subject("CSARCH2", 3, true);
+        Subject subject2_withno_prereq = new Subject("CSARCH3", 3, true);
+        List<Subject> subjectsTaken =  List.of(subject1_withno_prereq, subject2_withno_prereq);
+        Subject subject3_with_prereq = new Subject("CSARCH4", 3, true, List.of(subject1_withno_prereq));
+
+        Student student = new Student(2, Collections.emptyList(), Collections.emptyList());
+
+        Section section_with_prereq = new Section("A", MTH_0830, new Room("X", 10), subject3_with_prereq);
+
+
+
+        assertThrows(PrerequisitesNotMetException.class, ()-> student.enlist(section_with_prereq));
 
     }
 
