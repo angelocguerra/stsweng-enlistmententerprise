@@ -66,9 +66,25 @@ class Student {
 
         sections.remove(other);
     }
+    /**
+     * Requests the assessment of the student's tuition fees.
+     * @return      The total amount of tuition fees to be paid by the student.
+     */
+    double requestAssessment() {
+        double totalUnits = 0;
+        double totalLabFees = 0;
+        for (Section section : sections) {
+            Subject subject = section.getSubject();
+            totalUnits += subject.getUnits();
+            if (subject.getIsLaboratory()) {
+                totalLabFees += 1000;
+            }
+        }
 
-    double assessment() {
-        return 0.0;
+        double totalFees = totalUnits * 2000;
+        double totalMiscFees = 3000;
+        double totalVAT = 0.12 * (totalFees + totalLabFees + totalMiscFees);
+        return totalFees + totalLabFees + totalMiscFees + totalVAT;
     }
 
     /**

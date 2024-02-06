@@ -100,6 +100,14 @@ class Section {
         return schedule;
     }
 
+    /**
+     * Gets the subject for the section
+     * @return     The subject for the section.
+     */
+    Subject getSubject() {
+        return subject;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)

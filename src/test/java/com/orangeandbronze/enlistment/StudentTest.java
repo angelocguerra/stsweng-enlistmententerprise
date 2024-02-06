@@ -221,7 +221,7 @@ class StudentTest {
     void assessment_when_there_are_no_enlisted_sections() {
         Student student = newDefaultStudent();
 
-        double assessment = student.assessment();
+        double assessment = student.requestAssessment();
         assertEquals(3360.0, assessment);
     }
 
@@ -237,8 +237,8 @@ class StudentTest {
         student.enlist(section1);
         student.enlist(section2);
 
-        double assessment = student.assessment();
-        assertEquals(7840.0, assessment);
+        double assessment = student.requestAssessment();
+        assertEquals(12320.0, assessment);
     }
 
     @Test
@@ -253,7 +253,7 @@ class StudentTest {
         student.enlist(section1);
         student.enlist(section2);
 
-        double assessment = student.assessment();
+        double assessment = student.requestAssessment();
         assertEquals(19040.0, assessment);
     }
 
@@ -271,8 +271,8 @@ class StudentTest {
         student.enlist(section2);
         student.enlist(section3);
 
-        double assessment = student.assessment();
-        assertEquals(22400.0, assessment);
+        double assessment = student.requestAssessment();
+        assertEquals(20160.0, assessment);
     }
 
     @Test
@@ -289,7 +289,7 @@ class StudentTest {
         student.enlist(section2);
         student.enlist(section3);
 
-        double assessment = student.assessment();
+        double assessment = student.requestAssessment();
         assertEquals(3360.0, assessment);
     }
 
@@ -307,7 +307,7 @@ class StudentTest {
         student.enlist(section2);
         student.enlist(section3);
 
-        double assessment = student.assessment();
+        double assessment = student.requestAssessment();
         assertEquals(20160.0, assessment);
     }
 }
