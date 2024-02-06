@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class StudentTest {
     final Schedule MTH_0830 = new Schedule(Days.MTH, Period.H0830);
     final Schedule TF_1000 = new Schedule(Days.TF, Period.H1000);
+    final Schedule TF_0830 = new Schedule(Days.TF, Period.H0830);
 
     Student newDefaultStudent() {
         return new Student(1);
@@ -203,5 +204,99 @@ class StudentTest {
     @Test
     void subject_negative_units(){
         assertThrows(IllegalArgumentException.class, ()-> new Subject("CSARCH2", -1, true));
+    }
+
+    @Test
+    void assessment_when_there_are_no_enlisted_sections() {
+        Student student = newDefaultStudent();
+
+        double assessment = student.assessment();
+        assertEquals(3360.0, assessment);
+    }
+
+    @Test
+    void assessment_with_only_non_lab_subjects() {
+        Student student = newDefaultStudent();
+        Room X = new Room("X", 10);
+        Room Y = new Room("Y", 10);
+
+        Section section1 = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
+        Section section2 = new Section("B", TF_1000, Y, new Subject("GETEAMS", 2, false));
+
+        student.enlist(section1);
+        student.enlist(section2);
+
+        double assessment = student.assessment();
+        assertEquals(7840.0, assessment);
+    }
+
+    @Test
+    void assessment_with_only_lab_subjects() {
+        Student student = newDefaultStudent();
+        Room X = new Room("X", 10);
+        Room Y = new Room("Y", 10);
+
+        Section section1 = new Section("A", MTH_0830, X, new Subject("LBYARCH", 3, true));
+        Section section2 = new Section("B", TF_1000, Y, new Subject("LABCCS", 3, true));
+
+        student.enlist(section1);
+        student.enlist(section2);
+
+        double assessment = student.assessment();
+        assertEquals(19040.0, assessment);
+    }
+
+    @Test
+    void assessment_with_mix_of_lab_and_non_lab_subjects() {
+        Student student = newDefaultStudent();
+        Room X = new Room("X", 10);
+        Room Y = new Room("Y", 10);
+
+        Section section1 = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
+        Section section2 = new Section("B", TF_1000, Y, new Subject("STSWENG", 3, false));
+        Section section3 = new Section("C", TF_0830, Y, new Subject("LBYARCH", 2, true));
+
+        student.enlist(section1);
+        student.enlist(section2);
+        student.enlist(section3);
+
+        double assessment = student.assessment();
+        assertEquals(22400.0, assessment);
+    }
+
+    @Test
+    void assessment_when_only_0_unit_sections_are_enlisted() {
+        Student student = newDefaultStudent();
+        Room X = new Room("X", 10);
+        Room Y = new Room("Y", 10);
+
+        Section section1 = new Section("A", MTH_0830, X, new Subject("LCLSONE", 0, false));
+        Section section2 = new Section("B", TF_1000, Y, new Subject("LCLSTWO", 0, false));
+        Section section3 = new Section("C", TF_0830, Y, new Subject("LCLSTRI", 0, false));
+
+        student.enlist(section1);
+        student.enlist(section2);
+        student.enlist(section3);
+
+        double assessment = student.assessment();
+        assertEquals(3360.0, assessment);
+    }
+
+    @Test
+    void assessment_with_mix_of_0_unit_and_non_zero_unit_subjects() {
+        Student student = newDefaultStudent();
+        Room X = new Room("X", 10);
+        Room Y = new Room("Y", 10);
+
+        Section section1 = new Section("A", MTH_0830, X, new Subject("LCLSONE", 0, false));
+        Section section2 = new Section("B", TF_1000, Y, new Subject("MTH101", 5, false));
+        Section section3 = new Section("C", TF_0830, Y, new Subject("LBYARCH", 2, true));
+
+        student.enlist(section1);
+        student.enlist(section2);
+        student.enlist(section3);
+
+        double assessment = student.assessment();
+        assertEquals(20160.0, assessment);
     }
 }
