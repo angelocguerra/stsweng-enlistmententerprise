@@ -3,8 +3,8 @@ package com.orangeandbronze.enlistment;
 import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.isAlphanumeric;
-import static org.apache.commons.lang3.Validate.isTrue;
-import static org.apache.commons.lang3.Validate.notBlank;
+import static org.apache.commons.lang3.Validate.*;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a subject with is subjectId, number of units,
@@ -70,6 +70,17 @@ class Subject {
      */
     Collection<Subject> getprereqSubjects() {
         return new ArrayList<>(prereqSubjects);
+    }
+
+    void checkPrerequisites(Collection<Subject> subjectsTaken) {
+        requireNonNull(subjectsTaken, "Subjects taken cannot be null");
+        Collection<Subject> copySubjectsTaken = new HashSet<>(subjectsTaken); // sets are quicker to search through
+        if (!copySubjectsTaken.containsAll(prereqSubjects)) {
+            Collection<Subject> copyOfPrereqs = new HashSet<>(prereqSubjects);
+            copyOfPrereqs.removeAll(copySubjectsTaken);
+            throw new PrerequisitesNotMetException(
+                    "Unmet Prerequisites: " + copyOfPrereqs);
+        }
     }
 
     @Override

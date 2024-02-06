@@ -16,20 +16,20 @@ class Student {
     private final Collection<Subject> subjectsTaken = new HashSet<>();
 
     /**
-     * Creates a student with their own student number and sections.
+     * Creates a student with the specified student number, enrolled sections, and subjects taken.
      * @param studentNo     Specific student number for each student.
      * @param sections      The collection of sections in which a student is enrolled.
+     * @param subjectsTaken The collection of subjects taken by the student.
      */
     Student(int studentNo, Collection<Section> sections, Collection<Subject> subjectsTaken) {
         isTrue(studentNo >= 0, "Student number cannot be negative" + studentNo);
         requireNonNull(sections, "Sections cannot be null");
+        requireNonNull(subjectsTaken, "Subjects taken cannot be null");
 
         this.studentNo = studentNo;
         this.sections.addAll(sections);
         this.subjectsTaken.addAll(subjectsTaken);
-        //subjectstaken can be null
-        this.subjectsTaken.removeIf(Objects::isNull);
-
+        this.subjectsTaken.removeIf(Objects::isNull); // subjectsTaken can be null
 
         isTrue(!this.sections.contains(null), "Sections cannot contain null elements");
     }
@@ -43,16 +43,28 @@ class Student {
     }
 
     /**
+     * Creates a student with the specified student number and enrolled sections.
+     * @param studentNo     Specific student number for each student.
+     * @param sections      The collection of sections in which a student is enrolled.
+     */
+    Student(int studentNo, Collection<Section> sections) {
+        this(studentNo, sections, Collections.emptyList());
+    }
+
+    /**
      * Enlists the student in a new section, checking for schedule conflicts with existing sections and for duplicate subject.
      * @param newSection    The section to be enlisted.
      */
     void enlist(Section newSection) {
         requireNonNull(newSection, "Section cannot be null");
 
-        //check for schedule conflicts
+        // check for schedule conflicts
         sections.forEach(existingSection -> existingSection.checkForConflict(newSection));
 
-        //check for duplicate subjects
+        // check for prerequisites
+        newSection.checkPrerequisites(subjectsTaken);
+
+        // check for duplicate subjects
         if (sections.stream().anyMatch(existingSection -> existingSection.hasSameSubject(newSection))) {
             throw new DuplicateSubjectEnlistmentException("Cannot enlist in two sections with the same subject");
         }

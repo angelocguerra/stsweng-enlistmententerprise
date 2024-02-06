@@ -1,7 +1,6 @@
 package com.orangeandbronze.enlistment;
 
-import org.apache.commons.lang3.*;
-
+import java.util.*;
 import static java.util.Objects.requireNonNull;
 import static org.apache.commons.lang3.Validate.*;
 import static org.apache.commons.lang3.StringUtils.*;
@@ -90,6 +89,12 @@ class Section {
     void addNumberOfEnlisted() {
         room.checkForOverCapacity(numberOfEnlisted);
         numberOfEnlisted++;
+    }
+
+    void checkPrerequisites(Collection<Subject> subjectsTaken) {
+        requireNonNull(subjectsTaken, "Subjects taken cannot be null");
+        Collection<Subject> copy = new HashSet<>(subjectsTaken);
+        subject.checkPrerequisites(copy);
     }
 
     /**
