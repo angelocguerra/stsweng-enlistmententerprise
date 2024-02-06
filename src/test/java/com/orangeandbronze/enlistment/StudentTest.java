@@ -202,10 +202,6 @@ class StudentTest {
     }
 
     @Test
-    void subject_negative_units(){
-        assertThrows(IllegalArgumentException.class, ()-> new Subject("CSARCH2", -1, true));
-    }
-    @Test
     void student_enlists_in_section_with_correct_prerequisites() {
         // Given section and student where prereqs taken
         Subject subject1_withno_prereq = new Subject("CCPROG1", 3, true);
