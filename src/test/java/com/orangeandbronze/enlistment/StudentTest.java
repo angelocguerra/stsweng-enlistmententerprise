@@ -207,7 +207,6 @@ class StudentTest {
     }
 
     void student_enlists_in_section_with_correct_prerequisites() {
-        Student student = newDefaultStudent();
 
     }
 
