@@ -251,7 +251,7 @@ class StudentTest {
         Student student = newDefaultStudent();
 
         BigDecimal assessment = student.requestAssessment();
-        assertEquals(3360.00, assessment);
+        assertEquals(new BigDecimal("3360.00"), assessment);
     }
 
     @Test
@@ -267,7 +267,7 @@ class StudentTest {
         student.enlist(section2);
 
         BigDecimal assessment = student.requestAssessment();
-        assertEquals(12320.00, assessment);
+        assertEquals(new BigDecimal("12320.00"), assessment);
     }
 
     @Test
@@ -283,7 +283,7 @@ class StudentTest {
         student.enlist(section2);
 
         BigDecimal assessment = student.requestAssessment();
-        assertEquals(19040.00, assessment);
+        assertEquals(new BigDecimal("19040.00"), assessment);
     }
 
     @Test
@@ -301,7 +301,7 @@ class StudentTest {
         student.enlist(section3);
 
         BigDecimal assessment = student.requestAssessment();
-        assertEquals(20160.00, assessment);
+        assertEquals(new BigDecimal("20160.00"), assessment);
     }
 
     @Test
@@ -319,7 +319,7 @@ class StudentTest {
         student.enlist(section3);
 
         BigDecimal assessment = student.requestAssessment();
-        assertEquals(3360.00, assessment);
+        assertEquals(new BigDecimal("3360.00"), assessment);
     }
 
     @Test
@@ -337,6 +337,6 @@ class StudentTest {
         student.enlist(section3);
 
         BigDecimal assessment = student.requestAssessment();
-        assertEquals(20160.00, assessment);
+        assertEquals(new BigDecimal("20160.00"), assessment);
     }
 }
