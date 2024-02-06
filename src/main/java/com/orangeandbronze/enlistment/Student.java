@@ -67,6 +67,10 @@ class Student {
         sections.remove(other);
     }
 
+    double assessment() {
+        return 0.0;
+    }
+
     /**
      * Retrieves a copy of the sections in which the student is currently enrolled.
      * @return      A copy of the sections in which the student is enrolled.
