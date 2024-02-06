@@ -72,6 +72,10 @@ class Subject {
         return new ArrayList<>(prereqSubjects);
     }
 
+    /**
+     * Checks if the student has met the prerequisites for the subject.
+     * @param subjectsTaken     The collection of subjects taken by the student.
+     */
     void checkPrerequisites(Collection<Subject> subjectsTaken) {
         requireNonNull(subjectsTaken, "Subjects taken cannot be null");
         Collection<Subject> copySubjectsTaken = new HashSet<>(subjectsTaken); // sets are quicker to search through

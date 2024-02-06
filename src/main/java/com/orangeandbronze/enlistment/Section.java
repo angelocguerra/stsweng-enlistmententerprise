@@ -91,6 +91,10 @@ class Section {
         numberOfEnlisted++;
     }
 
+    /**
+     * Checks if the student has met the prerequisites for the subject.
+     * @param subjectsTaken    The collection of subjects taken by the student.
+     */
     void checkPrerequisites(Collection<Subject> subjectsTaken) {
         requireNonNull(subjectsTaken, "Subjects taken cannot be null");
         Collection<Subject> copy = new HashSet<>(subjectsTaken);
