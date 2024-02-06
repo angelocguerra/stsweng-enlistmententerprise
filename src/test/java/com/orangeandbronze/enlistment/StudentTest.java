@@ -207,46 +207,46 @@ class StudentTest {
     }
     @Test
     void student_enlists_in_section_with_correct_prerequisites() {
-        //declare subjects
-
-        Subject subject1_withno_prereq = new Subject("CSARCH2", 3, true);
-        Subject subject2_withno_prereq = new Subject("CSARCH3", 3, true);
+        // Given section and student where prereqs taken
+        Subject subject1_withno_prereq = new Subject("CCPROG1", 3, true);
+        Subject subject2_withno_prereq = new Subject("CCPROG2", 3, false);
         List<Subject> subjectsTaken =  List.of(subject1_withno_prereq, subject2_withno_prereq);
-        Subject subject3_with_prereq = new Subject("CSARCH4", 3, true, List.of(subject1_withno_prereq));
+
+        // Subject 3 has a prereq of subject 1
+        Subject subject3_with_prereq = new Subject("CCPROG3", 3, true, List.of(subject1_withno_prereq));
 
         Student student = new Student(2, Collections.emptyList(), subjectsTaken);
 
-        Section section_with_prereq = new Section("A", MTH_0830, new Room("X", 10), subject3_with_prereq);
+        // Section with subject 3
+        Section section_with_prereq = new Section("CSADPRG", MTH_0830, new Room("X", 10), subject3_with_prereq);
+
+        // When student enlists
         student.enlist(section_with_prereq);
-
-
-        assertTrue(student.getSections().contains(section_with_prereq));
-
-
-
-
-
-
-
-
-
+        // Then enlistment is successful
+        assertAll(
+                ()-> assertTrue(student.getSections().contains(section_with_prereq)),
+                () -> assertEquals(1, section_with_prereq.getNumberOfEnlisted())
+        );
     }
 
     @Test
     void student_enlists_in_section_with_incorrect_prerequisites() {
-        Subject subject1_withno_prereq = new Subject("CSARCH2", 3, true);
-        Subject subject2_withno_prereq = new Subject("CSARCH3", 3, true);
+        // Given section and student where some prerequisites are unmet
+        Subject subject1_withno_prereq = new Subject("CSMATH1", 3, true);
+        Subject subject2_withno_prereq = new Subject("CSMATH2", 3, true);
         List<Subject> subjectsTaken =  List.of(subject1_withno_prereq, subject2_withno_prereq);
-        Subject subject3_with_prereq = new Subject("CSARCH4", 3, true, List.of(subject1_withno_prereq));
+
+        // Subject 3 has a prereq of subject 1
+        Subject subject3_with_prereq = new Subject("CSMATH3", 3, true, List.of(subject1_withno_prereq));
 
         Student student = new Student(2, Collections.emptyList(), Collections.emptyList());
 
+        // Section with subject 3
         Section section_with_prereq = new Section("A", MTH_0830, new Room("X", 10), subject3_with_prereq);
 
-
-
+        // When student enlists
+        // Then exception thrown
         assertThrows(PrerequisitesNotMetException.class, ()-> student.enlist(section_with_prereq));
-
     }
 
     @Test
