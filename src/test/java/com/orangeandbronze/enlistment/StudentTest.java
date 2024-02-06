@@ -204,4 +204,18 @@ class StudentTest {
     void subject_negative_units(){
         assertThrows(IllegalArgumentException.class, ()-> new Subject("CSARCH2", -1, true));
     }
+
+    @Test
+    void student_enlists_in_section_with_correct_prerequisites() {
+        Student student = newDefaultStudent();
+
+    }
+
+    @Test
+    void student_enlists_in_section_with_incorrect_prerequisites() {
+        Student student = newDefaultStudent();
+
+    }
+
+
 }
