@@ -6,12 +6,23 @@ import static org.apache.commons.lang3.StringUtils.isAlphanumeric;
 import static org.apache.commons.lang3.Validate.isTrue;
 import static org.apache.commons.lang3.Validate.notBlank;
 
+/**
+ * Represents a subject with is subjectId, number of units,
+ * laboratory indicator, and prerequisites.
+ */
 class Subject {
     private final String subjectId;
     private final int units;
     private final boolean isLaboratory;
     private final Collection<Subject> prereqSubjects = new HashSet<>();
 
+    /**
+     * Creates a new Subject with specified parameters
+     * @param subjectId         The subject identifier
+     * @param units             The number of units of the subject
+     * @param isLaboratory      The boolean indicator of whether the subject is a laboratory subject.
+     * @param prereqSubjects    The collection of prerequisites of the subject
+     */
     Subject(String subjectId, int units, boolean isLaboratory, Collection<Subject> prereqSubjects) {
         notBlank(subjectId, "subjectId cannot be null or blank");
         isTrue(isAlphanumeric(subjectId), "subjectId must be alphanumeric, was: " + subjectId);
@@ -25,18 +36,38 @@ class Subject {
         isTrue(!this.prereqSubjects.contains(null), "Prerequisite subjects cannot contain null elements");
     }
 
+    /**
+     * Creates a new Subject with no prerequisite subjects
+     * @param subjectId         The subject identifier
+     * @param units             The number of units of the subject
+     * @param isLaboratory      The boolean indicator of whether the subject is a laboratory subject.
+     */
     Subject(String subjectId, int units, boolean isLaboratory) {
         this(subjectId, units, isLaboratory, Collections.emptyList());
     }
 
+    /**
+     * Gets the number of units for the subject.
+     *
+     * @return      The number of units for the subject.
+     */
     double getUnits() {
         return units;
     }
 
+    /**
+     * Checks if the subject is a laboratory subject.
+     *
+     * @return      The boolean indicator of whether the subject is a laboratory subject.
+     */
     boolean getIsLaboratory(){
         return isLaboratory;
     }
 
+    /**
+     * Retrieves a copy of the sections in which the student is currently enrolled.
+     * @return      A copy of the prerequisites of a subject
+     */
     Collection<Subject> getprereqSubjects() {
         return new ArrayList<>(prereqSubjects);
     }
