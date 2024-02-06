@@ -1,5 +1,7 @@
 package com.orangeandbronze.enlistment;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.*;
 
@@ -89,21 +91,32 @@ class Student {
      * Requests the assessment of the student's tuition fees.
      * @return      The total amount of tuition fees to be paid by the student.
      */
-    double requestAssessment() {
-        double totalUnits = 0;
-        double totalLabFees = 0;
+
+
+    BigDecimal requestAssessment() {
+        // declare totalUnits as big decimal data type
+        final int UNIT_COST = 2000;
+        final BigDecimal LAB_FEE = new BigDecimal(1000);
+        final BigDecimal MISC_FEE = new BigDecimal(3000);
+        final BigDecimal VAT = new BigDecimal(1.12);
+
+        BigDecimal total = BigDecimal.ZERO;
         for (Section section : sections) {
-            Subject subject = section.getSubject();
-            totalUnits += subject.getUnits();
-            if (subject.getIsLaboratory()) {
-                totalLabFees += 1000;
+            double units = section.getSubject().getUnits();
+            BigDecimal subjectCost = new BigDecimal(UNIT_COST * units);
+            total = total.add(subjectCost);
+            if (section.getSubject().getIsLaboratory()) {
+                total = total.add(LAB_FEE);
             }
         }
 
-        double totalFees = totalUnits * 2000;
-        double totalMiscFees = 3000;
-        double totalVAT = 0.12 * (totalFees + totalLabFees + totalMiscFees);
-        return totalFees + totalLabFees + totalMiscFees + totalVAT;
+        total = total.add(MISC_FEE);
+        total = total.multiply(VAT);
+
+        total = total.setScale(2, RoundingMode.HALF_UP);
+
+        return total;
+
     }
 
     /**

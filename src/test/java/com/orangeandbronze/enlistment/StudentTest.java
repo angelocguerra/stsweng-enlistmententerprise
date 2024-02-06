@@ -2,6 +2,7 @@ package com.orangeandbronze.enlistment;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
@@ -249,8 +250,8 @@ class StudentTest {
     void assessment_when_there_are_no_enlisted_sections() {
         Student student = newDefaultStudent();
 
-        double assessment = student.requestAssessment();
-        assertEquals(3360.0, assessment);
+        BigDecimal assessment = student.requestAssessment();
+        assertEquals(3360.00, assessment);
     }
 
     @Test
@@ -265,8 +266,8 @@ class StudentTest {
         student.enlist(section1);
         student.enlist(section2);
 
-        double assessment = student.requestAssessment();
-        assertEquals(12320.0, assessment);
+        BigDecimal assessment = student.requestAssessment();
+        assertEquals(12320.00, assessment);
     }
 
     @Test
@@ -281,8 +282,8 @@ class StudentTest {
         student.enlist(section1);
         student.enlist(section2);
 
-        double assessment = student.requestAssessment();
-        assertEquals(19040.0, assessment);
+        BigDecimal assessment = student.requestAssessment();
+        assertEquals(19040.00, assessment);
     }
 
     @Test
@@ -299,8 +300,8 @@ class StudentTest {
         student.enlist(section2);
         student.enlist(section3);
 
-        double assessment = student.requestAssessment();
-        assertEquals(20160.0, assessment);
+        BigDecimal assessment = student.requestAssessment();
+        assertEquals(20160.00, assessment);
     }
 
     @Test
@@ -317,8 +318,8 @@ class StudentTest {
         student.enlist(section2);
         student.enlist(section3);
 
-        double assessment = student.requestAssessment();
-        assertEquals(3360.0, assessment);
+        BigDecimal assessment = student.requestAssessment();
+        assertEquals(3360.00, assessment);
     }
 
     @Test
@@ -335,7 +336,7 @@ class StudentTest {
         student.enlist(section2);
         student.enlist(section3);
 
-        double assessment = student.requestAssessment();
-        assertEquals(20160.0, assessment);
+        BigDecimal assessment = student.requestAssessment();
+        assertEquals(20160.00, assessment);
     }
 }
