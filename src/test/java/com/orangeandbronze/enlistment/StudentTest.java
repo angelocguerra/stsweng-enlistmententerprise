@@ -456,4 +456,23 @@ class StudentTest {
         // Then an exception will be thrown
         assertThrows(Exception.class, () -> student.enlist(sec_must_not_in_enlistment));
     }
+
+    @Test
+    void student_enlisted_more_than_24_units() {
+        Subject CSMATH2 = new Subject("CSMATH2", 20, false);
+        Subject CCDSALG = new Subject("CCDSALG", 5, false);
+
+        DegreeProgram BS_CS_ST = new DegreeProgram("BS CS-ST", new HashSet<>(List.of(CSMATH2, CCDSALG)));
+
+        Student student = newDefaultStudent(1, BS_CS_ST);
+
+        Room X = new Room("X", 10);
+        Room Y = new Room("Y", 10);
+
+        Section section1 = new Section("A", MTH_0830, X, CSMATH2);
+        Section section2 = new Section("B", TF_1000, Y, CCDSALG);
+
+        student.enlist(section1);
+        //TODO: Assert Exception thrown when student enlists in section2
+    }
 }
