@@ -117,6 +117,8 @@ class Section {
         return subject;
     }
 
+    int getSubjectUnits() { return subject.getUnits(); }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
