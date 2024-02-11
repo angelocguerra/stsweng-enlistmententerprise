@@ -67,6 +67,9 @@ class Student {
         // check for schedule conflicts
         sections.forEach(existingSection -> existingSection.checkForConflict(newSection));
 
+        // check if subject is part of degree program
+        studentDegreeProgram.checkIfSubjectPartOfProgram(newSection.getSubject());
+
         // check for prerequisites
         newSection.checkPrerequisites(subjectsTaken);
 
