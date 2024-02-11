@@ -19,6 +19,8 @@ class Student {
 
     private final DegreeProgram studentDegreeProgram;
 
+    private final int totalUnitsEnlisted;
+
     /**
      * Creates a student with the specified student number, enrolled sections, and subjects taken.
      * @param studentNo     Specific student number for each student.
@@ -36,6 +38,7 @@ class Student {
         this.sections.addAll(sections);
         this.subjectsTaken.addAll(subjectsTaken);
         this.subjectsTaken.removeIf(Objects::isNull); // subjectsTaken can be null
+        this.totalUnitsEnlisted = 0;
 
         isTrue(!this.sections.contains(null), "Sections cannot contain null elements");
     }
@@ -63,6 +66,7 @@ class Student {
      */
     void enlist(Section newSection) {
         requireNonNull(newSection, "Section cannot be null");
+        int newTotalUnitsEnlisted = totalUnitsEnlisted + newSection.getSubjectUnits();
 
         // check for schedule conflicts
         sections.forEach(existingSection -> existingSection.checkForConflict(newSection));
@@ -76,6 +80,10 @@ class Student {
         // check for duplicate subjects
         if (sections.stream().anyMatch(existingSection -> existingSection.hasSameSubject(newSection))) {
             throw new DuplicateSubjectEnlistmentException("Cannot enlist in two sections with the same subject");
+        }
+
+        if (newTotalUnitsEnlisted > 24) {
+            throw new MaxUnitsPerStudentLimitExceededException("Cannot enlist in more than 24 units. Current total units enlisted: " + newTotalUnitsEnlisted + " units");
         }
 
         sections.add(newSection);
