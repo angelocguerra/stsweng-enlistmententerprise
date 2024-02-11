@@ -18,4 +18,11 @@ class DegreeProgram {
         this.degreeProgramSubjects.removeIf(Objects::isNull);
         this.degreeProgramName= degreeProgramName;
     }
+
+    void checkIfSubjectPartOfProgram(Subject subject){
+        if (!degreeProgramSubjects.contains(subject)){
+            throw new RuntimeException(
+                    "Subject " + subject + " doesn't belong to degree " + degreeProgramName );
+        }
+    }
 }
