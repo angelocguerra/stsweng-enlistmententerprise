@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,17 +14,22 @@ class StudentTest {
     final Schedule TF_1000 = new Schedule(Days.TF, Period.H1000);
     final Schedule TF_0830 = new Schedule(Days.TF, Period.H0830);
 
+    final Subject MTH101A = new Subject("MTH101A", 3, false);
+    final Subject CCICOMP = new Subject("CCICOMP", 3, true);
+    final Subject CCPROG1 = new Subject("CCPROG3", 3, true);
+    final DegreeProgram BS_CS_ST = new DegreeProgram("BS CS-ST", new HashSet<>(List.of(MTH101A, CCICOMP, CCPROG1)));
+
     Student newDefaultStudent() {
-        return new Student(1);
+        return new Student(1, BS_CS_ST);
     }
 
-    Student newDefaultStudent(int studentNo) {
-        return new Student(studentNo);
+    Student newDefaultStudent(int studentNo, DegreeProgram degreeProgram) {
+        return new Student(studentNo, degreeProgram);
     }
 
     @Test
     void enlist_same_student_in_2_sections_with_no_same_schedule() {
-        // Given a student w/ no sections and 2 sections with no sked conflict
+        // Given a student w/ no sections and 2 sections with no sched conflict
         Student student = newDefaultStudent();
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
@@ -43,7 +49,7 @@ class StudentTest {
 
     @Test
     void enlist_same_student_in_2_sections_with_same_schedule() {
-        // Given a student w/ no sections and 2 sections with same sked
+        // Given a student w/ no sections and 2 sections with same sched
         Student student = newDefaultStudent();
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
@@ -60,8 +66,8 @@ class StudentTest {
     @Test
     void enlist_within_room_capacity() {
         // Given 2 students and 1 section with room X of capacity 10
-        Student student1 = newDefaultStudent(1);
-        Student student2 = newDefaultStudent(2);
+        Student student1 = newDefaultStudent(1, BS_CS_ST);
+        Student student2 = newDefaultStudent(2, BS_CS_ST);
         final int CAP = 10;
         Room X = new Room("X", CAP);
 
@@ -77,8 +83,8 @@ class StudentTest {
     @Test
     void enlist_exceeds_room_capacity() {
         // Given 2 students and 1 section with room X of capacity 1
-        Student student1 = newDefaultStudent(1);
-        Student student2 = newDefaultStudent(2);
+        Student student1 = newDefaultStudent(1, BS_CS_ST);
+        Student student2 = newDefaultStudent(2, BS_CS_ST);
 
         final int CAP = 1;
         Room X = new Room("X", CAP);
@@ -94,8 +100,8 @@ class StudentTest {
     @Test
     void enlist_students_in_2_sections_with_max_capacity_sharing_the_same_room() {
         // Given 2 students and 2 sections with same room X of capacity 1
-        Student student1 = newDefaultStudent(1);
-        Student student2 = newDefaultStudent(2);
+        Student student1 = newDefaultStudent(1, BS_CS_ST);
+        Student student2 = newDefaultStudent(2, BS_CS_ST);
 
         final int CAP = 1;
         Room X = new Room("X", CAP);
@@ -212,7 +218,8 @@ class StudentTest {
         // Subject 3 has a prereq of subject 1
         Subject subject3_with_prereq = new Subject("CCPROG3", 3, true, List.of(subject1_withno_prereq));
 
-        Student student = new Student(2, Collections.emptyList(), subjectsTaken);
+        DegreeProgram BS_IT = new DegreeProgram("BS IT", new HashSet<>(List.of(subject1_withno_prereq, subject2_withno_prereq, subject3_with_prereq)));
+        Student student = new Student(2, Collections.emptyList(), subjectsTaken, BS_IT);
 
         // Section with subject 3
         Section section_with_prereq = new Section("CSADPRG", MTH_0830, new Room("X", 10), subject3_with_prereq);
@@ -231,12 +238,12 @@ class StudentTest {
         // Given section and student where some prerequisites are unmet
         Subject subject1_withno_prereq = new Subject("CSMATH1", 3, true);
         Subject subject2_withno_prereq = new Subject("CSMATH2", 3, true);
-        List<Subject> subjectsTaken =  List.of(subject1_withno_prereq, subject2_withno_prereq);
 
         // Subject 3 has a prereq of subject 1
         Subject subject3_with_prereq = new Subject("CSMATH3", 3, true, List.of(subject1_withno_prereq));
 
-        Student student = new Student(2, Collections.emptyList(), Collections.emptyList());
+        DegreeProgram BS_CS_CSE = new DegreeProgram("BS CS-CSE", new HashSet<>(List.of(subject1_withno_prereq, subject2_withno_prereq, subject3_with_prereq)));
+        Student student = new Student(2, Collections.emptyList(), Collections.emptyList(), BS_CS_CSE);
 
         // Section with subject 3
         Section section_with_prereq = new Section("A", MTH_0830, new Room("X", 10), subject3_with_prereq);
