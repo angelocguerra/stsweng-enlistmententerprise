@@ -16,7 +16,7 @@ class StudentTest {
 
     final Subject MTH101A = new Subject("MTH101A", 3, false);
     final Subject CCICOMP = new Subject("CCICOMP", 3, true);
-    final Subject CCPROG1 = new Subject("CCPROG3", 3, true);
+    final Subject CCPROG1 = new Subject("CCPROG1", 3, true);
     final DegreeProgram BS_CS_ST = new DegreeProgram("BS CS-ST", new HashSet<>(List.of(MTH101A, CCICOMP, CCPROG1)));
 
     Student newDefaultStudent() {
@@ -30,11 +30,11 @@ class StudentTest {
     @Test
     void enlist_same_student_in_2_sections_with_no_same_schedule() {
         // Given a student w/ no sections and 2 sections with no sched conflict
-        Student student = newDefaultStudent();
+        Student student = newDefaultStudent(1, BS_CS_ST);
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section sec1 = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
-        Section sec2 = new Section("B", TF_1000, Y, new Subject("GETEAMS", 2, false));
+        Section sec1 = new Section("A", MTH_0830, X, MTH101A);
+        Section sec2 = new Section("B", TF_1000, Y, CCICOMP);
 
         // When student enlists in both sections
         student.enlist(sec1);
@@ -49,12 +49,12 @@ class StudentTest {
 
     @Test
     void enlist_same_student_in_2_sections_with_same_schedule() {
-        // Given a student w/ no sections and 2 sections with same sched
-        Student student = newDefaultStudent();
+        // Given a student w/ no sections and 2 sections with same schedule
+        Student student = newDefaultStudent(1, BS_CS_ST);
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section sec1 = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
-        Section sec2 = new Section("B", MTH_0830, Y, new Subject("GETEAMS", 2, false));
+        Section sec1 = new Section("A", MTH_0830, X, CCICOMP);
+        Section sec2 = new Section("B", MTH_0830, Y, CCPROG1);
 
         // When student enlists in the both sections
         student.enlist(sec1);
@@ -71,7 +71,8 @@ class StudentTest {
         final int CAP = 10;
         Room X = new Room("X", CAP);
 
-        Section section = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
+        Section section = new Section("A", MTH_0830, X, MTH101A);
+
         // Both students enlist in same section
         student1.enlist(section);
         student2.enlist(section);
@@ -89,7 +90,7 @@ class StudentTest {
         final int CAP = 1;
         Room X = new Room("X", CAP);
 
-        Section section = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
+        Section section = new Section("A", MTH_0830, X, CCICOMP);
 
         // Both students enlist in same section
         student1.enlist(section);
@@ -106,8 +107,8 @@ class StudentTest {
         final int CAP = 1;
         Room X = new Room("X", CAP);
 
-        Section section1 = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
-        Section section2 = new Section("B", TF_1000, X, new Subject("GETEAMS", 2, false));
+        Section section1 = new Section("A", MTH_0830, X, CCPROG1);
+        Section section2 = new Section("B", TF_1000, X, MTH101A);
 
         // Both students enlist in different sections
         student1.enlist(section1);
@@ -119,71 +120,97 @@ class StudentTest {
     // CANCELLING ENLISTMENT
     @Test
     void student_cancels_their_only_enlisted_section() {
-        Student student = newDefaultStudent();
+        Student student = newDefaultStudent(1, BS_CS_ST);
+
+        // Initialized Room and Section
         Room X = new Room("X", 10);
-        Section section = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
+        Section section = new Section("A", MTH_0830, X, CCICOMP);
+
+        // Student enlists in a section
         student.enlist(section);
+
+        // Student cancels enlisted section
         student.cancelEnlistment(section);
         assertTrue(student.getSections().isEmpty());
     }
 
     @Test
     void student_cancels_one_of_their_two_enlisted_sections() {
-        Student student = newDefaultStudent();
+        Student student = newDefaultStudent(1, BS_CS_ST);
+
+        // Initialized Room and Section
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section section1 = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
-        Section section2 = new Section("B", TF_1000, Y, new Subject("GETEAMS", 2, false));
+        Section section1 = new Section("A", MTH_0830, X, MTH101A);
+        Section section2 = new Section("B", TF_1000, Y, CCPROG1);
+
+        // Student enlists in 2 sections
         student.enlist(section1);
         student.enlist(section2);
         assertTrue(student.getSections().containsAll(List.of(section1, section2)));
+
+        // Student cancels one of the enlisted sections
         student.cancelEnlistment(section1);
         assertFalse(student.getSections().containsAll(List.of(section1, section2)));
-
     }
 
     @Test
     void student_cancels_their_only_two_enlisted_sections() {
-        Student student = newDefaultStudent();
+        Student student = newDefaultStudent(1, BS_CS_ST);
+
+        // Initialized Room and Section
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section section1 = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
-        Section section2 = new Section("B", TF_1000, Y, new Subject("GETEAMS", 2, false));
+        Section section1 = new Section("A", MTH_0830, X, CCICOMP);
+        Section section2 = new Section("B", TF_1000, Y, CCPROG1);
+
+        // Student enlists in two sections
         student.enlist(section1);
         student.enlist(section2);
         assertTrue(student.getSections().containsAll(List.of(section1, section2)));
+
+        // Student cancels both enlisted sections
         student.cancelEnlistment(section1);
         assertFalse(student.getSections().containsAll(List.of(section1, section2)));
         student.cancelEnlistment(section2);
         assertTrue(student.getSections().isEmpty());
-
     }
 
     @Test
     void student_cancels_enlistment_of_section_not_enlisted() {
-        Student student = newDefaultStudent();
+        Student student = newDefaultStudent(1, BS_CS_ST);
+
+        // Initialized Room and Section
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section section1 = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
-        Section section2 = new Section("B", TF_1000, Y, new Subject("GETEAMS", 2, false));
+        Section section1 = new Section("A", MTH_0830, X, MTH101A);
+        Section section2 = new Section("B", TF_1000, Y, CCICOMP);
+
+        // Student enlists in a section1
         student.enlist(section1);
-        // assert that an exception is thrown
+
+        // Student tries to cancel enlistment of section2 which is not enlisted
+        // Assert that an exception is thrown
         assertThrows(CancellingUnenlistedSectionException.class, () -> student.cancelEnlistment(section2));
     }
 
     @Test
     void student_enlist_2_sections_with_different_subjects() {
-        Student student = newDefaultStudent();
+        Student student = newDefaultStudent(1, BS_CS_ST);
+
+        // Initialized Rooms
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        // Sections with  different subjects
-        Section section1 = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
-        Section section2 = new Section("B", TF_1000, Y, new Subject("GETEAMS", 2, false));
 
+        // Initialized Sections with  different subjects
+        Section section1 = new Section("A", MTH_0830, X, CCPROG1);
+        Section section2 = new Section("B", TF_1000, Y, MTH101A);
+
+        // Student enlists in both sections
         student.enlist(section1);
         student.enlist(section2);
 
-        // assert that the student is enlisted in both sections
+        // Assert that the student is enlisted in both sections
         var sections = student.getSections();
         System.out.println("Sections: " + sections);
         assertAll(
@@ -194,17 +221,20 @@ class StudentTest {
 
     @Test
     void student_enlist_2_sections_with_same_subjects() {
-        Student student = newDefaultStudent();
+        Student student = newDefaultStudent(1, BS_CS_ST);
+
+        // Initialized Rooms
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
 
-        // Sections with the same subject
-        Section section1 = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
-        Section section2 = new Section("B", TF_1000, Y, new Subject("GESPORT", 2, false));
+        // Initialized Sections with the same subject
+        Section section1 = new Section("A", MTH_0830, X, CCPROG1);
+        Section section2 = new Section("B", TF_1000, Y, CCPROG1);
 
+        // Student enlists in a section
         student.enlist(section1);
 
-        // assert exception is thrown when the student enlists in the second
+        // Assert exception is thrown when the student enlists in the second section
         assertThrows(DuplicateSubjectEnlistmentException.class, () -> student.enlist(section2));
     }
 
@@ -222,7 +252,7 @@ class StudentTest {
         Student student = new Student(2, Collections.emptyList(), subjectsTaken, BS_IT);
 
         // Section with subject 3
-        Section section_with_prereq = new Section("CSADPRG", MTH_0830, new Room("X", 10), subject3_with_prereq);
+        Section section_with_prereq = new Section("CCDSALG", MTH_0830, new Room("X", 10), subject3_with_prereq);
 
         // When student enlists
         student.enlist(section_with_prereq);
@@ -255,94 +285,149 @@ class StudentTest {
 
     @Test
     void assessment_when_there_are_no_enlisted_sections() {
+        // Given a student with no sections
         Student student = newDefaultStudent();
 
+        // Then the assessment should be 0.00
         BigDecimal assessment = student.requestAssessment();
         assertEquals(new BigDecimal("3360.00"), assessment);
     }
 
     @Test
     void assessment_with_only_non_lab_subjects() {
-        Student student = newDefaultStudent();
+        // Given: Non-Laboratory Subjects
+        Subject GESPORT = new Subject("GESPORT", 2, false);
+        Subject GETEAMS = new Subject("GETEAMS", 2, false);
+
+        // Initialized Degree Program and Student
+        DegreeProgram BS_IT = new DegreeProgram("BS IT", new HashSet<>(List.of(GESPORT, GETEAMS)));
+        Student student = newDefaultStudent(1, BS_IT);
+
+        // Initialized Room and Sections
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
 
-        Section section1 = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
-        Section section2 = new Section("B", TF_1000, Y, new Subject("GETEAMS", 2, false));
+        Section section1 = new Section("A", MTH_0830, X, GESPORT);
+        Section section2 = new Section("B", TF_1000, Y, GETEAMS);
 
+        // Student enlists in sections
         student.enlist(section1);
         student.enlist(section2);
 
+        // Then the assessment should be 12320.00
         BigDecimal assessment = student.requestAssessment();
         assertEquals(new BigDecimal("12320.00"), assessment);
     }
 
     @Test
     void assessment_with_only_lab_subjects() {
-        Student student = newDefaultStudent();
+        // Given: Laboratory Subjects
+        Subject LBYITN3 = new Subject("LBYITN3", 3, true);
+        Subject LBYSYAD = new Subject("LABCCS", 3, true);
+
+        // Initialized Degree Program and Student
+        DegreeProgram BS_IT = new DegreeProgram("BS IT", new HashSet<>(List.of(LBYITN3, LBYSYAD)));
+        Student student = newDefaultStudent(1, BS_IT);
+
+        // Initalized Room and Sections
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
 
-        Section section1 = new Section("A", MTH_0830, X, new Subject("LBYARCH", 3, true));
-        Section section2 = new Section("B", TF_1000, Y, new Subject("LABCCS", 3, true));
+        Section section1 = new Section("A", MTH_0830, X, LBYITN3);
+        Section section2 = new Section("B", TF_1000, Y, LBYSYAD);
 
+        // Student enlists in sections
         student.enlist(section1);
         student.enlist(section2);
 
+        // Then the assessment should be 19040.00
         BigDecimal assessment = student.requestAssessment();
         assertEquals(new BigDecimal("19040.00"), assessment);
     }
 
     @Test
     void assessment_with_mix_of_lab_and_non_lab_subjects() {
-        Student student = newDefaultStudent();
+        // Given: Lab and Non-Lab Subjects
+        Subject GESPORT = new Subject("GESPORT", 2, false);
+        Subject NSCOM01 = new Subject("NSCOM01", 3, false);
+        Subject LBYNCLD = new Subject("LBYNCLD", 2, true);
+
+        // Initialized Degree Program and Student
+        DegreeProgram BS_CS_NIS = new DegreeProgram("BS CS-NIS", new HashSet<>(List.of(GESPORT, NSCOM01, LBYNCLD)));
+        Student student = newDefaultStudent(1, BS_CS_NIS);
+
+        // Initialized Room and Sections
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
 
-        Section section1 = new Section("A", MTH_0830, X, new Subject("GESPORT", 2, false));
-        Section section2 = new Section("B", TF_1000, Y, new Subject("STSWENG", 3, false));
-        Section section3 = new Section("C", TF_0830, Y, new Subject("LBYARCH", 2, true));
+        Section section1 = new Section("A", MTH_0830, X, GESPORT);
+        Section section2 = new Section("B", TF_1000, Y, NSCOM01);
+        Section section3 = new Section("C", TF_0830, Y, LBYNCLD);
 
+        // Student enlists in sections
         student.enlist(section1);
         student.enlist(section2);
         student.enlist(section3);
 
+        // Then the assessment should be 20160.00
         BigDecimal assessment = student.requestAssessment();
         assertEquals(new BigDecimal("20160.00"), assessment);
     }
 
     @Test
     void assessment_when_only_0_unit_sections_are_enlisted() {
-        Student student = newDefaultStudent();
+        // Given: 0-unit subjects
+        Subject LCLSONE = new Subject("LCLSONE", 0, false);
+        Subject LCLSTWO = new Subject("LCLSTWO", 0, false);
+        Subject LCLSTRI = new Subject("LCLSTRI", 0, false);
+
+        // Initialized Degree Program and Student
+        DegreeProgram BS_IS = new DegreeProgram("BS IS", new HashSet<>(List.of(LCLSONE, LCLSTWO, LCLSTRI)));
+        Student student = newDefaultStudent(1, BS_IS);
+
+        // Initialized Room and Sections
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
 
-        Section section1 = new Section("A", MTH_0830, X, new Subject("LCLSONE", 0, false));
-        Section section2 = new Section("B", TF_1000, Y, new Subject("LCLSTWO", 0, false));
-        Section section3 = new Section("C", TF_0830, Y, new Subject("LCLSTRI", 0, false));
+        Section section1 = new Section("A", MTH_0830, X, LCLSONE);
+        Section section2 = new Section("B", TF_1000, Y, LCLSTWO);
+        Section section3 = new Section("C", TF_0830, Y, LCLSTRI);
 
+        // Student enlists in sections
         student.enlist(section1);
         student.enlist(section2);
         student.enlist(section3);
 
+        // Then the assessment should be 3360.00
         BigDecimal assessment = student.requestAssessment();
         assertEquals(new BigDecimal("3360.00"), assessment);
     }
 
     @Test
     void assessment_with_mix_of_0_unit_and_non_zero_unit_subjects() {
-        Student student = newDefaultStudent();
+        // Given: 0-unit and non-zero unit subjects
+        Subject LCLSONE = new Subject("LCLSONE", 0, false);
+        Subject MTH101A = new Subject("MTH101A", 5, false);
+        Subject LBYARCH = new Subject("LBYARCH", 2, true);
+
+        // Initialized Degree Program and Student
+        DegreeProgram BS_CS_ST = new DegreeProgram("BS CS-ST", new HashSet<>(List.of(LCLSONE, MTH101A, LBYARCH)));
+        Student student = newDefaultStudent(1, BS_CS_ST);
+
+        // Initialized Room and Sections
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
 
-        Section section1 = new Section("A", MTH_0830, X, new Subject("LCLSONE", 0, false));
-        Section section2 = new Section("B", TF_1000, Y, new Subject("MTH101", 5, false));
-        Section section3 = new Section("C", TF_0830, Y, new Subject("LBYARCH", 2, true));
+        Section section1 = new Section("A", MTH_0830, X, LCLSONE);
+        Section section2 = new Section("B", TF_1000, Y, MTH101A);
+        Section section3 = new Section("C", TF_0830, Y, LBYARCH);
 
+        // Student enlists in sections
         student.enlist(section1);
         student.enlist(section2);
         student.enlist(section3);
 
+        // Then the assessment should be 20160.00
         BigDecimal assessment = student.requestAssessment();
         assertEquals(new BigDecimal("20160.00"), assessment);
     }
