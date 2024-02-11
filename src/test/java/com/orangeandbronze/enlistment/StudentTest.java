@@ -431,4 +431,29 @@ class StudentTest {
         BigDecimal assessment = student.requestAssessment();
         assertEquals(new BigDecimal("20160.00"), assessment);
     }
+
+    @Test
+    void student_enlist_subject_part_of_degree_program() {
+        // Given a student and a section with a subject part of the degree program
+        Student student = newDefaultStudent(1, BS_CS_ST);
+        Section sec_in_enlistment = new Section("A", MTH_0830, new Room("X", 10), MTH101A);
+
+        // When student enlists in the section
+        student.enlist(sec_in_enlistment);
+
+        // Then the student should be enlisted in the section
+        assertTrue(student.getSections().contains(sec_in_enlistment));
+    }
+
+    @Test
+    void student_enlist_subject_not_part_of_degree_program() {
+        // Given a student and a section with a subject not part of the degree program
+        Student student = newDefaultStudent(1, BS_CS_ST);
+        Subject subject_not_in_degree = new Subject("ISINFOM", 3, false);
+        Section sec_must_not_in_enlistment = new Section("A", MTH_0830, new Room("X", 10), subject_not_in_degree);
+
+        // When student enlists in the section
+        // Then an exception will be thrown
+        assertThrows(Exception.class, () -> student.enlist(sec_must_not_in_enlistment));
+    }
 }
