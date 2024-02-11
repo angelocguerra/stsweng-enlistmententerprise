@@ -17,18 +17,22 @@ class Student {
 
     private final Collection<Subject> subjectsTaken = new HashSet<>();
 
+    private final DegreeProgram studentDegreeProgram;
+
     /**
      * Creates a student with the specified student number, enrolled sections, and subjects taken.
      * @param studentNo     Specific student number for each student.
      * @param sections      The collection of sections in which a student is enrolled.
      * @param subjectsTaken The collection of subjects taken by the student.
      */
-    Student(int studentNo, Collection<Section> sections, Collection<Subject> subjectsTaken) {
+    Student(int studentNo, Collection<Section> sections, Collection<Subject> subjectsTaken, DegreeProgram studentDegreeProgram) {
         isTrue(studentNo >= 0, "Student number cannot be negative" + studentNo);
         requireNonNull(sections, "Sections cannot be null");
         requireNonNull(subjectsTaken, "Subjects taken cannot be null");
+        requireNonNull(studentDegreeProgram, "Degree Program cannot be null");
 
         this.studentNo = studentNo;
+        this.studentDegreeProgram = studentDegreeProgram;
         this.sections.addAll(sections);
         this.subjectsTaken.addAll(subjectsTaken);
         this.subjectsTaken.removeIf(Objects::isNull); // subjectsTaken can be null
@@ -40,8 +44,8 @@ class Student {
      * Creates a student with the specified student number with no enrolled sections.
      * @param studentNo     Specific student number for each student.
      */
-    Student(int studentNo) {
-        this(studentNo, Collections.emptyList(), Collections.emptyList());
+    Student(int studentNo, DegreeProgram degreeProgram) {
+        this(studentNo, Collections.emptyList(), Collections.emptyList(), degreeProgram);
     }
 
     /**
@@ -49,8 +53,8 @@ class Student {
      * @param studentNo     Specific student number for each student.
      * @param sections      The collection of sections in which a student is enrolled.
      */
-    Student(int studentNo, Collection<Section> sections) {
-        this(studentNo, sections, Collections.emptyList());
+    Student(int studentNo, Collection<Section> sections, DegreeProgram degreeProgram) {
+        this(studentNo, sections, Collections.emptyList(), degreeProgram);
     }
 
     /**
