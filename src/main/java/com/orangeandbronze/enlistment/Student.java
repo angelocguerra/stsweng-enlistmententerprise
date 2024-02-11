@@ -109,7 +109,7 @@ class Student {
 
         BigDecimal total = BigDecimal.ZERO;
         for (Section section : sections) {
-            double units = section.getSubject().getUnits();
+            int units = section.getSubject().getUnits();
             BigDecimal subjectCost = new BigDecimal(UNIT_COST * units);
             total = total.add(subjectCost);
             if (section.getSubject().getIsLaboratory()) {

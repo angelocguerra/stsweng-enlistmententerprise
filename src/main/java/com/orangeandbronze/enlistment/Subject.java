@@ -51,7 +51,7 @@ class Subject {
      *
      * @return      The number of units for the subject.
      */
-    double getUnits() {
+    int getUnits() {
         return units;
     }
 
