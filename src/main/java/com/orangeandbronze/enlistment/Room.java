@@ -9,7 +9,7 @@ import static org.apache.commons.lang3.StringUtils.*;
 /**
  * Represents a room where classes would be held, with a maximum capacity.
  */
-public class Room {
+class Room {
     private final String roomName;
     private final int maxCapacity;
 
