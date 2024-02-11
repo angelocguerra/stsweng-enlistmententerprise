@@ -473,6 +473,7 @@ class StudentTest {
         Section section2 = new Section("B", TF_1000, Y, CCDSALG);
 
         student.enlist(section1);
-        //TODO: Assert Exception thrown when student enlists in section2
+
+        assertThrows(MaxUnitsPerStudentLimitExceededException.class, () -> student.enlist(section2));
     }
 }
