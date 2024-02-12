@@ -136,15 +136,6 @@ class Student {
         return new ArrayList<>(sections);
     }
 
-
-    /**
-     * Retrieves a copy of the subjects taken by the student.
-     * @return      A copy of the subjects taken by the student.
-     */
-    Collection<Subject> getSubjectsTaken() {
-        return new ArrayList<>(subjectsTaken);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o)
