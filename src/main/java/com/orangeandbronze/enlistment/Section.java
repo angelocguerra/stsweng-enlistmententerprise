@@ -42,20 +42,6 @@ class Section {
     }
 
     /**
-     * Creates a new section with enrolled students
-     * @param sectionID         The section identifier.
-     * @param schedule          The schedule for the section.
-     * @param room              The room where section is held.
-     * @param numberOfEnlisted  The number of students already enrolled in the section.
-     * @param subject         The subject identifier for the section.
-     */
-    Section(String sectionID, Schedule schedule, Room room, int numberOfEnlisted, Subject subject) {
-        this(sectionID, schedule, room, subject);
-        isTrue(numberOfEnlisted >= 0, "numberOfEnlisted cannot be negative");
-        this.numberOfEnlisted = numberOfEnlisted;
-    }
-
-    /**
      * Checks for a schedule conflict with another section.
      * @param other     The other section to check for conflicts.
      */
