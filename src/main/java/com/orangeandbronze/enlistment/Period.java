@@ -1,6 +1,7 @@
 package com.orangeandbronze.enlistment;
 
 import java.util.Objects;
+import static org.apache.commons.lang3.Validate.*;
 
 class Period {
     final int startHour;
@@ -16,6 +17,14 @@ class Period {
      * @param endIsAtBottomOfHour      Whether the period ends at the bottom of the hour
      */
     Period(int startHour, boolean startIsAtBottomOfHour, int endHour, boolean endIsAtBottomOfHour) {
+        inclusiveBetween(8, 17, startHour, "Period must be within the hours 8:30 to 17:30");
+        inclusiveBetween(8, 17, endHour, "Period must be within the hours 8:30 to 17:30");
+        isTrue(startHour != 8 || startIsAtBottomOfHour);
+        isTrue(endHour != 8 || endIsAtBottomOfHour);
+
+        isTrue(startHour <= endHour, "Period must start before it ends");
+        isTrue(startHour < endHour || (!startIsAtBottomOfHour && endIsAtBottomOfHour), "Period must start before it ends");
+
         this.startHour = startHour;
         this.startIsAtBottomOfHour = startIsAtBottomOfHour;
         this.endHour = endHour;
