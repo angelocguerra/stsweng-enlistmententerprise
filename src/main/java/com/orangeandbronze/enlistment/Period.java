@@ -4,10 +4,10 @@ import java.util.Objects;
 import static org.apache.commons.lang3.Validate.*;
 
 class Period {
-    final int startHour;
-    final boolean startIsAtBottomOfHour;
-    final int endHour;
-    final boolean endIsAtBottomOfHour;
+    private final int startHour;
+    private final boolean startIsAtBottomOfHour;
+    private final int endHour;
+    private final boolean endIsAtBottomOfHour;
 
     /**
      * Creates a period with the specified start and end times.
@@ -17,13 +17,16 @@ class Period {
      * @param endIsAtBottomOfHour      Whether the period ends at the bottom of the hour
      */
     Period(int startHour, boolean startIsAtBottomOfHour, int endHour, boolean endIsAtBottomOfHour) {
-        inclusiveBetween(8, 17, startHour, "Period must be within the hours 8:30 to 17:30");
-        inclusiveBetween(8, 17, endHour, "Period must be within the hours 8:30 to 17:30");
-        isTrue(startHour != 8 || startIsAtBottomOfHour);
-        isTrue(endHour != 8 || endIsAtBottomOfHour);
+        String within0830to1730Msg = "Period must be within the hours 8:30 to 17:30";
+        String periodStartsBeforeEndsMsg = "Period must start before it ends";
 
-        isTrue(startHour <= endHour, "Period must start before it ends");
-        isTrue(startHour < endHour || (!startIsAtBottomOfHour && endIsAtBottomOfHour), "Period must start before it ends");
+        inclusiveBetween(8, 17, startHour, within0830to1730Msg);
+        inclusiveBetween(8, 17, endHour, within0830to1730Msg);
+        isTrue(startHour != 8 || startIsAtBottomOfHour, within0830to1730Msg);
+        isTrue(endHour != 8 || endIsAtBottomOfHour, within0830to1730Msg);
+
+        isTrue(startHour <= endHour, periodStartsBeforeEndsMsg);
+        isTrue(startHour < endHour || (!startIsAtBottomOfHour && endIsAtBottomOfHour), periodStartsBeforeEndsMsg);
 
         this.startHour = startHour;
         this.startIsAtBottomOfHour = startIsAtBottomOfHour;
