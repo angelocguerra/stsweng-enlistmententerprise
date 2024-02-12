@@ -34,6 +34,12 @@ class Period {
         this.endIsAtBottomOfHour = endIsAtBottomOfHour;
     }
 
+    /**
+     * Checks if the period overlaps with another period.
+     * One period starting exactly when the other period ends is not considered overlap.
+     * @param other     The other period to check for overlap with
+     * @return          true if there is overlap, false otherwise
+     */
     boolean overlaps(Period other) {
         int start = startHour*100 + (startIsAtBottomOfHour ? 50 : 0);
         int end = endHour*100 + (endIsAtBottomOfHour ? 50 : 0);
