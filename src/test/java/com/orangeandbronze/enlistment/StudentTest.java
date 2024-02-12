@@ -10,9 +10,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StudentTest {
-    final Schedule MTH_0830 = new Schedule(Days.MTH, Period.H0830);
-    final Schedule TF_1000 = new Schedule(Days.TF, Period.H1000);
-    final Schedule TF_0830 = new Schedule(Days.TF, Period.H0830);
+    final Schedule MTH_0830 = new Schedule(Days.MTH, new Period(8, true, 10, false));
+    final Schedule TF_1000 = new Schedule(Days.TF, new Period(10, false, 11, true));
+    final Schedule TF_0830 = new Schedule(Days.TF, new Period(8, true, 10, false));
 
     final Subject MTH101A = new Subject("MTH101A", 3, false);
     final Subject CCICOMP = new Subject("CCICOMP", 3, true);
