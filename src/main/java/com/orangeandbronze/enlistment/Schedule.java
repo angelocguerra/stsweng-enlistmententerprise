@@ -23,6 +23,8 @@ class Schedule {
         this.period = period;
     }
 
+    Period getPeriod() { return period; }
+
     @Override
     public String toString() {
         return days + " " + period;

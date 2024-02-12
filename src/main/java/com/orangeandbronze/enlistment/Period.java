@@ -34,6 +34,20 @@ class Period {
         this.endIsAtBottomOfHour = endIsAtBottomOfHour;
     }
 
+    boolean overlaps(Period other) {
+        int start = startHour*100 + (startIsAtBottomOfHour ? 50 : 0);
+        int end = endHour*100 + (endIsAtBottomOfHour ? 50 : 0);
+        int otherStart = other.getStartHour()*100 + (other.getStartIsAtBottomOfHour() ? 50 : 0);
+        int otherEnd = other.getEndHour()*100 + (other.getEndIsAtBottomOfHour() ? 50 : 0);
+
+        return Math.min(end, otherEnd) > Math.max(start, otherStart);
+    }
+
+    int getStartHour() { return startHour; }
+    boolean getStartIsAtBottomOfHour() { return startIsAtBottomOfHour; }
+    int getEndHour() { return endHour; }
+    boolean getEndIsAtBottomOfHour() { return endIsAtBottomOfHour; }
+
     @Override
     public String toString() {
         String startMinutes = startIsAtBottomOfHour ? "30" : "00";
