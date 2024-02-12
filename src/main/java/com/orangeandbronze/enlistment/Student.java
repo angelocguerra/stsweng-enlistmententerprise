@@ -52,15 +52,6 @@ class Student {
     }
 
     /**
-     * Creates a student with the specified student number and enrolled sections.
-     * @param studentNo     Specific student number for each student.
-     * @param sections      The collection of sections in which a student is enrolled.
-     */
-    Student(int studentNo, Collection<Section> sections, DegreeProgram degreeProgram) {
-        this(studentNo, sections, Collections.emptyList(), degreeProgram);
-    }
-
-    /**
      * Enlists the student in a new section, checking for schedule conflicts with existing sections and for duplicate subject.
      * @param newSection    The section to be enlisted.
      */
