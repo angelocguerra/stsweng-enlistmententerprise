@@ -63,14 +63,7 @@ class Subject {
     boolean getIsLaboratory(){
         return isLaboratory;
     }
-
-    /**
-     * Retrieves a copy of the sections in which the student is currently enrolled.
-     * @return      A copy of the prerequisites of a subject
-     */
-    Collection<Subject> getprereqSubjects() {
-        return new ArrayList<>(prereqSubjects);
-    }
+    
 
     /**
      * Checks if the student has met the prerequisites for the subject.
