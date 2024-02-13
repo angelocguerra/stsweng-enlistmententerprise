@@ -41,18 +41,27 @@ class Period {
      * @return          true if there is overlap, false otherwise
      */
     boolean overlaps(Period other) {
-        int start = startHour*100 + (startIsAtBottomOfHour ? 50 : 0);
-        int end = endHour*100 + (endIsAtBottomOfHour ? 50 : 0);
-        int otherStart = other.getStartHour()*100 + (other.getStartIsAtBottomOfHour() ? 50 : 0);
-        int otherEnd = other.getEndHour()*100 + (other.getEndIsAtBottomOfHour() ? 50 : 0);
+        int start = this.getStart();
+        int end = this.getEnd();
+        int otherStart = other.getStart();
+        int otherEnd = other.getEnd();
 
         return Math.min(end, otherEnd) > Math.max(start, otherStart);
     }
 
-    int getStartHour() { return startHour; }
-    boolean getStartIsAtBottomOfHour() { return startIsAtBottomOfHour; }
-    int getEndHour() { return endHour; }
-    boolean getEndIsAtBottomOfHour() { return endIsAtBottomOfHour; }
+    /**
+     * Returns an order-preserving numerical representation of the start of the period.
+     * e.g. if Period A starts before Period B, A.getStart() will be less than B.getStart().
+     * @return      The numerical representation
+     */
+    int getStart() { return startHour*100 + (startIsAtBottomOfHour ? 50 : 0); }
+
+    /**
+     * Returns an order-preserving numerical representation of the end of the period.
+     * e.g. if Period A ends before Period B, A.getEnd() will be less than B.getEnd().
+     * @return      The numerical representation
+     */
+    int getEnd() { return endHour*100 + (endIsAtBottomOfHour ? 50 : 0); }
 
     @Override
     public String toString() {
