@@ -46,7 +46,7 @@ class Section {
      * @param other     The other section to check for conflicts.
      */
     void checkForConflict(Section other) {
-        if (schedule.getPeriod().overlaps(other.getSchedule().getPeriod())) {
+        if (schedule.hasConflictWith(other.getSchedule())) {
             throw new ScheduleConflictException(
                     "This section " + this + " has overlapping schedule with section " + other
                     + " which has the schedule " + other.getSchedule()

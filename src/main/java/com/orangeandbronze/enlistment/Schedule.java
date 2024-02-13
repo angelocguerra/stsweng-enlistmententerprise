@@ -23,6 +23,18 @@ class Schedule {
         this.period = period;
     }
 
+    boolean hasConflictWith(Schedule other) {
+        if (days != other.getDays()) {
+            return false;
+        }
+
+        return period.overlaps(other.getPeriod());
+    }
+
+    Days getDays() {
+        return days;
+    }
+
     Period getPeriod() { return period; }
 
     @Override
