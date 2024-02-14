@@ -96,23 +96,22 @@ class Student {
 
         sections.remove(other);
     }
+
     /**
      * Requests the assessment of the student's tuition fees.
      * @return      The total amount of tuition fees to be paid by the student.
      */
-
-
     BigDecimal requestAssessment() {
         // declare totalUnits as big decimal data type
-        final int UNIT_COST = 2000;
+        final BigDecimal UNIT_COST = new BigDecimal(2000);
         final BigDecimal LAB_FEE = new BigDecimal(1000);
         final BigDecimal MISC_FEE = new BigDecimal(3000);
-        final BigDecimal VAT = new BigDecimal(1.12);
+        final BigDecimal VAT = new BigDecimal("1.12");
 
         BigDecimal total = BigDecimal.ZERO;
         for (Section section : sections) {
             int units = section.getSubject().getUnits();
-            BigDecimal subjectCost = new BigDecimal(UNIT_COST * units);
+            BigDecimal subjectCost = UNIT_COST.multiply(BigDecimal.valueOf(units));
             total = total.add(subjectCost);
             if (section.getSubject().getIsLaboratory()) {
                 total = total.add(LAB_FEE);
@@ -125,7 +124,6 @@ class Student {
         total = total.setScale(2, RoundingMode.HALF_UP);
 
         return total;
-
     }
 
     /**
