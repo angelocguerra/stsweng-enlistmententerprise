@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 import static org.apache.commons.lang3.Validate.*;
 
 /**
- * Represents a student with a student number and their enrolled sections.
+ * Represents a student from a specific degree program with a student number and their enrolled sections.
  */
 class Student {
     private final int studentNo;
@@ -26,6 +26,7 @@ class Student {
      * @param studentNo     Specific student number for each student.
      * @param sections      The collection of sections in which a student is enrolled.
      * @param subjectsTaken The collection of subjects taken by the student.
+     * @param studentDegreeProgram      The degree program the student is currentlu enrolled in.
      */
     Student(int studentNo, Collection<Section> sections, Collection<Subject> subjectsTaken, DegreeProgram studentDegreeProgram) {
         isTrue(studentNo >= 0, "Student number cannot be negative" + studentNo);
@@ -44,15 +45,16 @@ class Student {
     }
 
     /**
-     * Creates a student with the specified student number with no enrolled sections.
+     * //Creates a student with the specified student number with no enrolled sections.
      * @param studentNo     Specific student number for each student.
+     * @param degreeProgram      The degree program the student is currentlu enrolled in.
      */
     Student(int studentNo, DegreeProgram degreeProgram) {
         this(studentNo, Collections.emptyList(), Collections.emptyList(), degreeProgram);
     }
 
     /**
-     * Enlists the student in a new section, checking for schedule conflicts with existing sections and for duplicate subject.
+     * Enlists the student in a new section, checking for schedule conflicts with existing sections and for duplicate subject. While making sure the student has less than 24 units.
      * @param newSection    The section to be enlisted.
      */
     void enlist(Section newSection) {
