@@ -466,8 +466,8 @@ class StudentTest {
 
         Student student = newDefaultStudent(1, BS_CS_ST);
 
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         Section section1 = new Section("A", MTH_0830, X, CSMATH2);
         Section section2 = new Section("B", TF_1000, Y, CCDSALG);
@@ -490,8 +490,8 @@ class StudentTest {
 
         Student student = newDefaultStudent(1, BS_CS_ST);
 
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         Section section1 = new Section("A", MTH_0830, X, CSMATH2);
         Section section2 = new Section("B", TF_1000, Y, CCDSALG);
