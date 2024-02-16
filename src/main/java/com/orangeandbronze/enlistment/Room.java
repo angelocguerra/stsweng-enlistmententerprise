@@ -3,6 +3,8 @@ package com.orangeandbronze.enlistment;
 import static org.apache.commons.lang3.Validate.*;
 
 import java.util.Objects;
+import java.util.Collection;
+import java.util.HashSet;
 
 import static org.apache.commons.lang3.StringUtils.*;
 
@@ -12,18 +14,20 @@ import static org.apache.commons.lang3.StringUtils.*;
 class Room {
     private final String roomName;
     private final int maxCapacity;
+    private final Collection<Schedule> takenTimeSlots = new HashSet<>();
 
     /**
      * Creates a new room with a specified name and maximum capacity.
      * @param roomName      The name of the room.
      * @param maxCapacity   The maximum capacity of the room.
      */
-    Room(String roomName, int maxCapacity) {
+    Room(String roomName, int maxCapacity, Collection<Schedule> takenTimeSlots) {
         notBlank(roomName);
         isTrue(isAlphanumeric(roomName), "roomName must be alphanumeric, was: " + roomName);
         isTrue(maxCapacity > 0, "maxCapacity must be greater than 0, was: " + maxCapacity);
         this.roomName = roomName;
         this.maxCapacity = maxCapacity;
+        this.takenTimeSlots.addAll(takenTimeSlots);
     }
 
     /**
@@ -34,6 +38,10 @@ class Room {
         if (numberOfEnlisted >= maxCapacity) {
             throw new RoomCapacityReachedException("Room " + this + " has reached max capacity of " + maxCapacity);
         }
+    }
+
+    Collection<Schedule> getTakenTimeSlots() {
+        return this.takenTimeSlots;
     }
 
     @Override
