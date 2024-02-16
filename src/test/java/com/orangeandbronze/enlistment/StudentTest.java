@@ -458,6 +458,54 @@ class StudentTest {
     }
 
     @Test
+    void student_enlisted_less_than_24_units() {
+        Subject CSMATH2 = new Subject("CSMATH2", 20, false);
+        Subject CCDSALG = new Subject("CCDSALG", 3, false);
+
+        DegreeProgram BS_CS_ST = new DegreeProgram("BS CS-ST", new HashSet<>(List.of(CSMATH2, CCDSALG)));
+
+        Student student = newDefaultStudent(1, BS_CS_ST);
+
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
+
+        Section section1 = new Section("A", MTH_0830, X, CSMATH2);
+        Section section2 = new Section("B", TF_1000, Y, CCDSALG);
+
+        student.enlist(section1);
+        student.enlist(section2);
+
+        assertAll(
+                () -> assertTrue(student.getSections().containsAll(List.of(section1, section2))),
+                () -> assertTrue(student.getTotalUnitsEnlisted() < 24)
+                );
+    }
+
+    @Test
+    void student_enlisted_exactly_24_units() {
+        Subject CSMATH2 = new Subject("CSMATH2", 20, false);
+        Subject CCDSALG = new Subject("CCDSALG", 4, false);
+
+        DegreeProgram BS_CS_ST = new DegreeProgram("BS CS-ST", new HashSet<>(List.of(CSMATH2, CCDSALG)));
+
+        Student student = newDefaultStudent(1, BS_CS_ST);
+
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
+
+        Section section1 = new Section("A", MTH_0830, X, CSMATH2);
+        Section section2 = new Section("B", TF_1000, Y, CCDSALG);
+
+        student.enlist(section1);
+        student.enlist(section2);
+
+        assertAll(
+                () -> assertTrue(student.getSections().containsAll(List.of(section1, section2))),
+                () -> assertEquals(24, student.getTotalUnitsEnlisted())
+        );
+    }
+
+    @Test
     void student_enlisted_more_than_24_units() {
         Subject CSMATH2 = new Subject("CSMATH2", 20, false);
         Subject CCDSALG = new Subject("CCDSALG", 5, false);
