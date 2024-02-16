@@ -33,6 +33,13 @@ class Section {
         requireNonNull(room, "Room cannot be null");
 
         requireNonNull(subject, "subjectId cannot be null");
+        Collection<Schedule> timeSlots = room.getTakenTimeSlots();
+        for (Schedule currtimeSlot : timeSlots) {
+            if (currtimeSlot.hasConflictWith(schedule)) {
+                throw new ScheduleRoomConflictException(
+                        "This section " + this + " has overlapping schedule and room with section " + schedule);
+            }
+        }
 
         this.sectionId = sectionID;
         this.schedule = schedule;
