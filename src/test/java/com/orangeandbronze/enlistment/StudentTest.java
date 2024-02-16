@@ -31,8 +31,8 @@ class StudentTest {
     void enlist_same_student_in_2_sections_with_no_same_schedule() {
         // Given a student w/ no sections and 2 sections with no sched conflict
         Student student = newDefaultStudent(1, BS_CS_ST);
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
         Section sec1 = new Section("A", MTH_0830, X, MTH101A);
         Section sec2 = new Section("B", TF_1000, Y, CCICOMP);
 
@@ -51,8 +51,8 @@ class StudentTest {
     void enlist_same_student_in_2_sections_with_same_schedule() {
         // Given a student w/ no sections and 2 sections with same schedule
         Student student = newDefaultStudent(1, BS_CS_ST);
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
         Section sec1 = new Section("A", MTH_0830, X, CCICOMP);
         Section sec2 = new Section("B", MTH_0830, Y, CCPROG1);
 
@@ -69,7 +69,7 @@ class StudentTest {
         Student student1 = newDefaultStudent(1, BS_CS_ST);
         Student student2 = newDefaultStudent(2, BS_CS_ST);
         final int CAP = 10;
-        Room X = new Room("X", CAP);
+        Room X = new Room("X", CAP, Collections.emptyList());
 
         Section section = new Section("A", MTH_0830, X, MTH101A);
 
@@ -88,7 +88,7 @@ class StudentTest {
         Student student2 = newDefaultStudent(2, BS_CS_ST);
 
         final int CAP = 1;
-        Room X = new Room("X", CAP);
+        Room X = new Room("X", CAP, Collections.emptyList());
 
         Section section = new Section("A", MTH_0830, X, CCICOMP);
 
@@ -105,7 +105,7 @@ class StudentTest {
         Student student2 = newDefaultStudent(2, BS_CS_ST);
 
         final int CAP = 1;
-        Room X = new Room("X", CAP);
+        Room X = new Room("X", CAP, Collections.emptyList());
 
         Section section1 = new Section("A", MTH_0830, X, CCPROG1);
         Section section2 = new Section("B", TF_1000, X, MTH101A);
@@ -123,7 +123,7 @@ class StudentTest {
         Student student = newDefaultStudent(1, BS_CS_ST);
 
         // Initialized Room and Section
-        Room X = new Room("X", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
         Section section = new Section("A", MTH_0830, X, CCICOMP);
 
         // Student enlists in a section
@@ -139,8 +139,8 @@ class StudentTest {
         Student student = newDefaultStudent(1, BS_CS_ST);
 
         // Initialized Room and Section
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
         Section section1 = new Section("A", MTH_0830, X, MTH101A);
         Section section2 = new Section("B", TF_1000, Y, CCPROG1);
 
@@ -159,8 +159,8 @@ class StudentTest {
         Student student = newDefaultStudent(1, BS_CS_ST);
 
         // Initialized Room and Section
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
         Section section1 = new Section("A", MTH_0830, X, CCICOMP);
         Section section2 = new Section("B", TF_1000, Y, CCPROG1);
 
@@ -181,8 +181,8 @@ class StudentTest {
         Student student = newDefaultStudent(1, BS_CS_ST);
 
         // Initialized Room and Section
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
         Section section1 = new Section("A", MTH_0830, X, MTH101A);
         Section section2 = new Section("B", TF_1000, Y, CCICOMP);
 
@@ -199,8 +199,8 @@ class StudentTest {
         Student student = newDefaultStudent(1, BS_CS_ST);
 
         // Initialized Rooms
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         // Initialized Sections with  different subjects
         Section section1 = new Section("A", MTH_0830, X, CCPROG1);
@@ -224,8 +224,8 @@ class StudentTest {
         Student student = newDefaultStudent(1, BS_CS_ST);
 
         // Initialized Rooms
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         // Initialized Sections with the same subject
         Section section1 = new Section("A", MTH_0830, X, CCPROG1);
@@ -252,7 +252,7 @@ class StudentTest {
         Student student = new Student(2, Collections.emptyList(), subjectsTaken, BS_IT);
 
         // Section with subject 3
-        Section section_with_prereq = new Section("CCDSALG", MTH_0830, new Room("X", 10), subject3_with_prereq);
+        Section section_with_prereq = new Section("CCDSALG", MTH_0830, new Room("X", 10, Collections.emptyList()), subject3_with_prereq);
 
         // When student enlists
         student.enlist(section_with_prereq);
@@ -276,7 +276,7 @@ class StudentTest {
         Student student = new Student(2, Collections.emptyList(), Collections.emptyList(), BS_CS_CSE);
 
         // Section with subject 3
-        Section section_with_prereq = new Section("A", MTH_0830, new Room("X", 10), subject3_with_prereq);
+        Section section_with_prereq = new Section("A", MTH_0830, new Room("X", 10, Collections.emptyList()), subject3_with_prereq);
 
         // When student enlists
         // Then exception thrown
@@ -304,8 +304,8 @@ class StudentTest {
         Student student = newDefaultStudent(1, BS_IT);
 
         // Initialized Room and Sections
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         Section section1 = new Section("A", MTH_0830, X, GESPORT);
         Section section2 = new Section("B", TF_1000, Y, GETEAMS);
@@ -330,8 +330,8 @@ class StudentTest {
         Student student = newDefaultStudent(1, BS_IT);
 
         // Initalized Room and Sections
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         Section section1 = new Section("A", MTH_0830, X, LBYITN3);
         Section section2 = new Section("B", TF_1000, Y, LBYSYAD);
@@ -357,8 +357,8 @@ class StudentTest {
         Student student = newDefaultStudent(1, BS_CS_NIS);
 
         // Initialized Room and Sections
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         Section section1 = new Section("A", MTH_0830, X, GESPORT);
         Section section2 = new Section("B", TF_1000, Y, NSCOM01);
@@ -386,8 +386,8 @@ class StudentTest {
         Student student = newDefaultStudent(1, BS_IS);
 
         // Initialized Room and Sections
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         Section section1 = new Section("A", MTH_0830, X, LCLSONE);
         Section section2 = new Section("B", TF_1000, Y, LCLSTWO);
@@ -415,8 +415,8 @@ class StudentTest {
         Student student = newDefaultStudent(1, BS_CS_ST);
 
         // Initialized Room and Sections
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         Section section1 = new Section("A", MTH_0830, X, LCLSONE);
         Section section2 = new Section("B", TF_1000, Y, MTH101A);
@@ -436,7 +436,7 @@ class StudentTest {
     void student_enlist_subject_part_of_degree_program() {
         // Given a student and a section with a subject part of the degree program
         Student student = newDefaultStudent(1, BS_CS_ST);
-        Section sec_in_enlistment = new Section("A", MTH_0830, new Room("X", 10), MTH101A);
+        Section sec_in_enlistment = new Section("A", MTH_0830, new Room("X", 10, Collections.emptyList()), MTH101A);
 
         // When student enlists in the section
         student.enlist(sec_in_enlistment);
@@ -450,7 +450,7 @@ class StudentTest {
         // Given a student and a section with a subject not part of the degree program
         Student student = newDefaultStudent(1, BS_CS_ST);
         Subject subject_not_in_degree = new Subject("ISINFOM", 3, false);
-        Section sec_must_not_in_enlistment = new Section("A", MTH_0830, new Room("X", 10), subject_not_in_degree);
+        Section sec_must_not_in_enlistment = new Section("A", MTH_0830, new Room("X", 10, Collections.emptyList()), subject_not_in_degree);
 
         // When student enlists in the section
         // Then an exception will be thrown
@@ -466,8 +466,8 @@ class StudentTest {
 
         Student student = newDefaultStudent(1, BS_CS_ST);
 
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         Section section1 = new Section("A", MTH_0830, X, CSMATH2);
         Section section2 = new Section("B", TF_1000, Y, CCDSALG);
@@ -486,8 +486,8 @@ class StudentTest {
 
         Student student = newDefaultStudent(1, BS_CS_ST);
 
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         Schedule sched1 = new Schedule(Days.MTH, new Period(9, true, 12, true));
         Schedule sched2 = new Schedule(Days.TF, new Period(11, false, 13, false));
@@ -514,8 +514,8 @@ class StudentTest {
 
         Student student = newDefaultStudent(1, BS_CS_ST);
 
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         Schedule sched1 = new Schedule(Days.MTH, new Period(9, false, 10, false));
         Schedule sched2 = new Schedule(Days.MTH, new Period(10, false, 11, false));
@@ -542,8 +542,8 @@ class StudentTest {
 
         Student student = newDefaultStudent(1, BS_CS_ST);
 
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         Schedule sched1 = new Schedule(Days.MTH, new Period(9, true, 12, true));
         Schedule sched2 = new Schedule(Days.MTH, new Period(11, false, 13, false));
@@ -565,8 +565,8 @@ class StudentTest {
 
         Student student = newDefaultStudent(1, BS_CS_ST);
 
-        Room X = new Room("X", 10);
-        Room Y = new Room("Y", 10);
+        Room X = new Room("X", 10, Collections.emptyList());
+        Room Y = new Room("Y", 10, Collections.emptyList());
 
         Schedule sched1 = new Schedule(Days.MTH, new Period(13, false, 17, true));
         Schedule sched2 = new Schedule(Days.MTH, new Period(14, true, 15, false));
