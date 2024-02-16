@@ -33,8 +33,9 @@ class StudentTest {
         Student student = newDefaultStudent(1, BS_CS_ST);
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section sec1 = new Section("A", MTH_0830, X, MTH101A);
-        Section sec2 = new Section("B", TF_1000, Y, CCICOMP);
+        SectionGroup allSections = new SectionGroup();
+        Section sec1 = new Section("A", MTH_0830, X, MTH101A, allSections);
+        Section sec2 = new Section("B", TF_1000, Y, CCICOMP, allSections);
 
         // When student enlists in both sections
         student.enlist(sec1);
@@ -53,8 +54,9 @@ class StudentTest {
         Student student = newDefaultStudent(1, BS_CS_ST);
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section sec1 = new Section("A", MTH_0830, X, CCICOMP);
-        Section sec2 = new Section("B", MTH_0830, Y, CCPROG1);
+        SectionGroup allSections = new SectionGroup();
+        Section sec1 = new Section("A", MTH_0830, X, CCICOMP, allSections);
+        Section sec2 = new Section("B", MTH_0830, Y, CCPROG1, allSections);
 
         // When student enlists in the both sections
         student.enlist(sec1);
@@ -71,7 +73,8 @@ class StudentTest {
         final int CAP = 10;
         Room X = new Room("X", CAP);
 
-        Section section = new Section("A", MTH_0830, X, MTH101A);
+        SectionGroup allSections = new SectionGroup();
+        Section section = new Section("A", MTH_0830, X, MTH101A, allSections);
 
         // Both students enlist in same section
         student1.enlist(section);
@@ -90,7 +93,8 @@ class StudentTest {
         final int CAP = 1;
         Room X = new Room("X", CAP);
 
-        Section section = new Section("A", MTH_0830, X, CCICOMP);
+        SectionGroup allSections = new SectionGroup();
+        Section section = new Section("A", MTH_0830, X, CCICOMP, allSections);
 
         // Both students enlist in same section
         student1.enlist(section);
@@ -107,8 +111,9 @@ class StudentTest {
         final int CAP = 1;
         Room X = new Room("X", CAP);
 
-        Section section1 = new Section("A", MTH_0830, X, CCPROG1);
-        Section section2 = new Section("B", TF_1000, X, MTH101A);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", MTH_0830, X, CCPROG1, allSections);
+        Section section2 = new Section("B", TF_1000, X, MTH101A, allSections);
 
         // Both students enlist in different sections
         student1.enlist(section1);
@@ -124,7 +129,8 @@ class StudentTest {
 
         // Initialized Room and Section
         Room X = new Room("X", 10);
-        Section section = new Section("A", MTH_0830, X, CCICOMP);
+        SectionGroup allSections = new SectionGroup();
+        Section section = new Section("A", MTH_0830, X, CCICOMP, allSections);
 
         // Student enlists in a section
         student.enlist(section);
@@ -141,8 +147,9 @@ class StudentTest {
         // Initialized Room and Section
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section section1 = new Section("A", MTH_0830, X, MTH101A);
-        Section section2 = new Section("B", TF_1000, Y, CCPROG1);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", MTH_0830, X, MTH101A, allSections);
+        Section section2 = new Section("B", TF_1000, Y, CCPROG1, allSections);
 
         // Student enlists in 2 sections
         student.enlist(section1);
@@ -161,8 +168,9 @@ class StudentTest {
         // Initialized Room and Section
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section section1 = new Section("A", MTH_0830, X, CCICOMP);
-        Section section2 = new Section("B", TF_1000, Y, CCPROG1);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", MTH_0830, X, CCICOMP, allSections);
+        Section section2 = new Section("B", TF_1000, Y, CCPROG1, allSections);
 
         // Student enlists in two sections
         student.enlist(section1);
@@ -183,8 +191,9 @@ class StudentTest {
         // Initialized Room and Section
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
-        Section section1 = new Section("A", MTH_0830, X, MTH101A);
-        Section section2 = new Section("B", TF_1000, Y, CCICOMP);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", MTH_0830, X, MTH101A, allSections);
+        Section section2 = new Section("B", TF_1000, Y, CCICOMP, allSections);
 
         // Student enlists in a section1
         student.enlist(section1);
@@ -203,8 +212,9 @@ class StudentTest {
         Room Y = new Room("Y", 10);
 
         // Initialized Sections with  different subjects
-        Section section1 = new Section("A", MTH_0830, X, CCPROG1);
-        Section section2 = new Section("B", TF_1000, Y, MTH101A);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", MTH_0830, X, CCPROG1, allSections);
+        Section section2 = new Section("B", TF_1000, Y, MTH101A, allSections);
 
         // Student enlists in both sections
         student.enlist(section1);
@@ -228,8 +238,9 @@ class StudentTest {
         Room Y = new Room("Y", 10);
 
         // Initialized Sections with the same subject
-        Section section1 = new Section("A", MTH_0830, X, CCPROG1);
-        Section section2 = new Section("B", TF_1000, Y, CCPROG1);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", MTH_0830, X, CCPROG1, allSections);
+        Section section2 = new Section("B", TF_1000, Y, CCPROG1, allSections);
 
         // Student enlists in a section
         student.enlist(section1);
@@ -252,7 +263,8 @@ class StudentTest {
         Student student = new Student(2, Collections.emptyList(), subjectsTaken, BS_IT);
 
         // Section with subject 3
-        Section section_with_prereq = new Section("CCDSALG", MTH_0830, new Room("X", 10), subject3_with_prereq);
+        SectionGroup allSections = new SectionGroup();
+        Section section_with_prereq = new Section("CCDSALG", MTH_0830, new Room("X", 10), subject3_with_prereq, allSections);
 
         // When student enlists
         student.enlist(section_with_prereq);
@@ -276,7 +288,8 @@ class StudentTest {
         Student student = new Student(2, Collections.emptyList(), Collections.emptyList(), BS_CS_CSE);
 
         // Section with subject 3
-        Section section_with_prereq = new Section("A", MTH_0830, new Room("X", 10), subject3_with_prereq);
+        SectionGroup allSections = new SectionGroup();
+        Section section_with_prereq = new Section("A", MTH_0830, new Room("X", 10), subject3_with_prereq, allSections);
 
         // When student enlists
         // Then exception thrown
@@ -307,8 +320,9 @@ class StudentTest {
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
 
-        Section section1 = new Section("A", MTH_0830, X, GESPORT);
-        Section section2 = new Section("B", TF_1000, Y, GETEAMS);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", MTH_0830, X, GESPORT, allSections);
+        Section section2 = new Section("B", TF_1000, Y, GETEAMS, allSections);
 
         // Student enlists in sections
         student.enlist(section1);
@@ -333,8 +347,9 @@ class StudentTest {
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
 
-        Section section1 = new Section("A", MTH_0830, X, LBYITN3);
-        Section section2 = new Section("B", TF_1000, Y, LBYSYAD);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", MTH_0830, X, LBYITN3, allSections);
+        Section section2 = new Section("B", TF_1000, Y, LBYSYAD, allSections);
 
         // Student enlists in sections
         student.enlist(section1);
@@ -360,9 +375,10 @@ class StudentTest {
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
 
-        Section section1 = new Section("A", MTH_0830, X, GESPORT);
-        Section section2 = new Section("B", TF_1000, Y, NSCOM01);
-        Section section3 = new Section("C", TF_0830, Y, LBYNCLD);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", MTH_0830, X, GESPORT, allSections);
+        Section section2 = new Section("B", TF_1000, Y, NSCOM01, allSections);
+        Section section3 = new Section("C", TF_0830, Y, LBYNCLD, allSections);
 
         // Student enlists in sections
         student.enlist(section1);
@@ -389,9 +405,10 @@ class StudentTest {
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
 
-        Section section1 = new Section("A", MTH_0830, X, LCLSONE);
-        Section section2 = new Section("B", TF_1000, Y, LCLSTWO);
-        Section section3 = new Section("C", TF_0830, Y, LCLSTRI);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", MTH_0830, X, LCLSONE, allSections);
+        Section section2 = new Section("B", TF_1000, Y, LCLSTWO, allSections);
+        Section section3 = new Section("C", TF_0830, Y, LCLSTRI, allSections);
 
         // Student enlists in sections
         student.enlist(section1);
@@ -418,9 +435,10 @@ class StudentTest {
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
 
-        Section section1 = new Section("A", MTH_0830, X, LCLSONE);
-        Section section2 = new Section("B", TF_1000, Y, MTH101A);
-        Section section3 = new Section("C", TF_0830, Y, LBYARCH);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", MTH_0830, X, LCLSONE, allSections);
+        Section section2 = new Section("B", TF_1000, Y, MTH101A, allSections);
+        Section section3 = new Section("C", TF_0830, Y, LBYARCH, allSections);
 
         // Student enlists in sections
         student.enlist(section1);
@@ -436,7 +454,8 @@ class StudentTest {
     void student_enlist_subject_part_of_degree_program() {
         // Given a student and a section with a subject part of the degree program
         Student student = newDefaultStudent(1, BS_CS_ST);
-        Section sec_in_enlistment = new Section("A", MTH_0830, new Room("X", 10), MTH101A);
+        SectionGroup allSections = new SectionGroup();
+        Section sec_in_enlistment = new Section("A", MTH_0830, new Room("X", 10), MTH101A, allSections);
 
         // When student enlists in the section
         student.enlist(sec_in_enlistment);
@@ -450,7 +469,8 @@ class StudentTest {
         // Given a student and a section with a subject not part of the degree program
         Student student = newDefaultStudent(1, BS_CS_ST);
         Subject subject_not_in_degree = new Subject("ISINFOM", 3, false);
-        Section sec_must_not_in_enlistment = new Section("A", MTH_0830, new Room("X", 10), subject_not_in_degree);
+        SectionGroup allSections = new SectionGroup();
+        Section sec_must_not_in_enlistment = new Section("A", MTH_0830, new Room("X", 10), subject_not_in_degree, allSections);
 
         // When student enlists in the section
         // Then an exception will be thrown
@@ -469,8 +489,9 @@ class StudentTest {
         Room X = new Room("X", 10);
         Room Y = new Room("Y", 10);
 
-        Section section1 = new Section("A", MTH_0830, X, CSMATH2);
-        Section section2 = new Section("B", TF_1000, Y, CCDSALG);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", MTH_0830, X, CSMATH2, allSections);
+        Section section2 = new Section("B", TF_1000, Y, CCDSALG, allSections);
 
         student.enlist(section1);
 
@@ -492,8 +513,9 @@ class StudentTest {
         Schedule sched1 = new Schedule(Days.MTH, new Period(9, true, 12, true));
         Schedule sched2 = new Schedule(Days.TF, new Period(11, false, 13, false));
 
-        Section section1 = new Section("A", sched1, X, CSMATH2);
-        Section section2 = new Section("B", sched2, Y, CCDSALG);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", sched1, X, CSMATH2, allSections);
+        Section section2 = new Section("B", sched2, Y, CCDSALG, allSections);
 
         student.enlist(section1);
         student.enlist(section2);
@@ -520,8 +542,9 @@ class StudentTest {
         Schedule sched1 = new Schedule(Days.MTH, new Period(9, false, 10, false));
         Schedule sched2 = new Schedule(Days.MTH, new Period(10, false, 11, false));
 
-        Section section1 = new Section("A", sched1, X, CSMATH2);
-        Section section2 = new Section("B", sched2, Y, CCDSALG);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", sched1, X, CSMATH2, allSections);
+        Section section2 = new Section("B", sched2, Y, CCDSALG, allSections);
 
         student.enlist(section1);
         student.enlist(section2);
@@ -548,8 +571,9 @@ class StudentTest {
         Schedule sched1 = new Schedule(Days.MTH, new Period(9, true, 12, true));
         Schedule sched2 = new Schedule(Days.MTH, new Period(11, false, 13, false));
 
-        Section section1 = new Section("A", sched1, X, CSMATH2);
-        Section section2 = new Section("B", sched2, Y, CCDSALG);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", sched1, X, CSMATH2, allSections);
+        Section section2 = new Section("B", sched2, Y, CCDSALG, allSections);
 
         student.enlist(section1);
 
@@ -571,8 +595,9 @@ class StudentTest {
         Schedule sched1 = new Schedule(Days.MTH, new Period(13, false, 17, true));
         Schedule sched2 = new Schedule(Days.MTH, new Period(14, true, 15, false));
 
-        Section section1 = new Section("A", sched1, X, CSMATH2);
-        Section section2 = new Section("B", sched2, Y, CCDSALG);
+        SectionGroup allSections = new SectionGroup();
+        Section section1 = new Section("A", sched1, X, CSMATH2, allSections);
+        Section section2 = new Section("B", sched2, Y, CCDSALG, allSections);
 
         student.enlist(section1);
 
