@@ -474,7 +474,7 @@ class StudentTest {
 
         // When student enlists in the section
         // Then an exception will be thrown
-        assertThrows(Exception.class, () -> student.enlist(sec_must_not_in_enlistment));
+        assertThrows(NotPartOfDegreeProgramException.class, () -> student.enlist(sec_must_not_in_enlistment));
     }
 
     @Test
