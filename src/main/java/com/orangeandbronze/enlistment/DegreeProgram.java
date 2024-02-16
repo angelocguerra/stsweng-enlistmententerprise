@@ -21,8 +21,21 @@ class DegreeProgram {
 
     void checkIfSubjectPartOfProgram(Subject subject){
         if (!degreeProgramSubjects.contains(subject)){
-            throw new RuntimeException(
+            throw new NotPartOfDegreeProgramException(
                     "Subject " + subject + " doesn't belong to degree " + degreeProgramName );
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DegreeProgram that = (DegreeProgram) o;
+        return degreeProgramName.equals(that.degreeProgramName) && degreeProgramSubjects.equals(that.degreeProgramSubjects);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(degreeProgramName, degreeProgramSubjects);
     }
 }
