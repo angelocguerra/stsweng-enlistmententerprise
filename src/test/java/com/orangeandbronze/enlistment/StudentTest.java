@@ -578,4 +578,17 @@ class StudentTest {
 
         assertThrows(ScheduleConflictException.class, () -> student.enlist(section2));
     }
+
+    @Test
+    void section_has_same_room_overlap() {
+        Room X = new Room("X", 5, Collections.emptyList());
+
+        Schedule sched1 = new Schedule(Days.MTH, new Period(13, false, 17, true));
+        Schedule sched2 = new Schedule(Days.MTH, new Period(14, true, 15, false));
+
+        Section section1 = new Section("A", sched1, X, MTH101A);
+        X.getTakenTimeSlots().add(section1.getSchedule());
+
+        assertThrows(ScheduleRoomConflictException.class, () -> new Section("B", sched2, X, CCICOMP));
+    }
 }
