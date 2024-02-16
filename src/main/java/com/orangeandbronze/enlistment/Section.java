@@ -22,10 +22,9 @@ class Section {
      * @param sectionID     The section identifier.
      * @param schedule      The schedule for the section.
      * @param room          The room where section is held.
-     * @param subject       The subject identifier for the section.
-     * @param allSections   The allSections contains all currently available sections
+     * @param subject     The subject identifier for the section.
      */
-    Section(String sectionID, Schedule schedule, Room room, Subject subject, SectionGroup allSections) {
+    Section(String sectionID, Schedule schedule, Room room, Subject subject) {
         notBlank(sectionID, "sectionID cannot be null or blank");
         isTrue(isAlphanumeric(sectionID), "sectionID must be alphanumeric, was: " + sectionID);
 
@@ -35,14 +34,11 @@ class Section {
 
         requireNonNull(subject, "subjectId cannot be null");
 
-        checkForRoomConflict(allSections.getSections());
-
         this.sectionId = sectionID;
         this.schedule = schedule;
         this.room = room;
         this.subject = subject;
         this.numberOfEnlisted = 0;
-        allSections.addSection(this);
     }
 
     /**
@@ -56,21 +52,6 @@ class Section {
                     + " which has the schedule " + other.getSchedule()
             );
         }
-    }
-
-    void checkForRoomConflict(Collection<Section> otherSections) {
-        for (Section other: otherSections) {
-            if (schedule.hasConflictWith(other.getSchedule())) {
-                if (this.room.toString().equals(other.room.toString())) {
-                    throw new ScheduleRoomConflictException(
-                            "This section " + this + " has overlapping schedule and room with section " +
-                            other + " which has the schedule " + other.getSchedule() +
-                            "and room " + other.room.toString()
-                    );
-                }
-            }
-        }
-
     }
 
     /**

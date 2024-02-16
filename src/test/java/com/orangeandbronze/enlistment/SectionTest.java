@@ -13,8 +13,10 @@ class SectionTest {
     void instantiating_two_sections_with_schedule_conflict_to_same_room() {
         Room X = new Room("X", 10);
         SectionGroup allSections = new SectionGroup();
-        Section sec1 = new Section("A", MTH_0830, X, MTH101A, allSections);
-        Section sec2 = new Section("B", MTH_0830, X, CCICOMP, allSections);
+        Section sec1 = new Section("A", MTH_0830, X, MTH101A);
+        allSections.addSection(sec1);
+        Section sec2 = new Section("B", MTH_0830, X, CCICOMP);
+        allSections.addSection(sec2);
 
         assertEquals(1, allSections.getSections().size());
     }
