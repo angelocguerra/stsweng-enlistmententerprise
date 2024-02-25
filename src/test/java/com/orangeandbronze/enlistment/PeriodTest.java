@@ -15,7 +15,7 @@ class PeriodTest {
     @Test
     void back_to_back_periods_do_not_overlap() {
         var period1 = new Period(14, false, 15, true);
-        var period2 = new Period(15, false, 16, true);
+        var period2 = new Period(15, true, 16, true);
 
         assertFalse(period1.overlapsWith(period2));
     }
