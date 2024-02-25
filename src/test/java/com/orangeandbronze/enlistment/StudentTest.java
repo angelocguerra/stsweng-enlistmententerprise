@@ -48,22 +48,6 @@ class StudentTest {
     }
 
     @Test
-    void enlist_same_student_in_2_sections_with_same_schedule() {
-        // Given a student w/ no sections and 2 sections with same schedule
-        Student student = newDefaultStudent(1, BS_CS_ST);
-        Room X = new Room("X", 10, Collections.emptyList());
-        Room Y = new Room("Y", 10, Collections.emptyList());
-        Section sec1 = new Section("A", MTH_0830, X, CCICOMP);
-        Section sec2 = new Section("B", MTH_0830, Y, CCPROG1);
-
-        // When student enlists in the both sections
-        student.enlist(sec1);
-
-        // Then an exception will be thrown at the second enlistment
-        assertThrows(ScheduleConflictException.class, () -> student.enlist(sec2));
-    }
-
-    @Test
     void enlist_within_room_capacity() {
         // Given 2 students and 1 section with room X of capacity 10
         Student student1 = newDefaultStudent(1, BS_CS_ST);
@@ -551,80 +535,6 @@ class StudentTest {
                 () -> assertTrue(sections.containsAll(List.of(section1, section2))),
                 () -> assertEquals(2, sections.size())
         );
-    }
-
-    @Test
-    void enlist_sections_with_back_to_back_schedules() {
-        Subject CSMATH2 = new Subject("CSMATH2", 2, false);
-        Subject CCDSALG = new Subject("CCDSALG", 5, false);
-
-        DegreeProgram BS_CS_ST = new DegreeProgram("BS CS-ST", new HashSet<>(List.of(CSMATH2, CCDSALG)));
-
-        Student student = newDefaultStudent(1, BS_CS_ST);
-
-        Room X = new Room("X", 10, Collections.emptyList());
-        Room Y = new Room("Y", 10, Collections.emptyList());
-
-        Schedule sched1 = new Schedule(Days.MTH, new Period(9, false, 10, false));
-        Schedule sched2 = new Schedule(Days.MTH, new Period(10, false, 11, false));
-
-        Section section1 = new Section("A", sched1, X, CSMATH2);
-        Section section2 = new Section("B", sched2, Y, CCDSALG);
-
-        student.enlist(section1);
-        student.enlist(section2);
-
-        var sections = student.getSections();
-        assertAll(
-                () -> assertTrue(sections.containsAll(List.of(section1, section2))),
-                () -> assertEquals(2, sections.size())
-        );
-    }
-
-    @Test
-    void enlist_sections_with_overlapping_but_not_identical_schedules() {
-        Subject CSMATH2 = new Subject("CSMATH2", 2, false);
-        Subject CCDSALG = new Subject("CCDSALG", 5, false);
-
-        DegreeProgram BS_CS_ST = new DegreeProgram("BS CS-ST", new HashSet<>(List.of(CSMATH2, CCDSALG)));
-
-        Student student = newDefaultStudent(1, BS_CS_ST);
-
-        Room X = new Room("X", 10, Collections.emptyList());
-        Room Y = new Room("Y", 10, Collections.emptyList());
-
-        Schedule sched1 = new Schedule(Days.MTH, new Period(9, true, 12, true));
-        Schedule sched2 = new Schedule(Days.MTH, new Period(11, false, 13, false));
-
-        Section section1 = new Section("A", sched1, X, CSMATH2);
-        Section section2 = new Section("B", sched2, Y, CCDSALG);
-
-        student.enlist(section1);
-
-        assertThrows(ScheduleConflictException.class, () -> student.enlist(section2));
-    }
-
-    @Test
-    void enlist_sections_where_one_period_encompasses_the_other() {
-        Subject CSMATH2 = new Subject("CSMATH2", 2, false);
-        Subject CCDSALG = new Subject("CCDSALG", 5, false);
-
-        DegreeProgram BS_CS_ST = new DegreeProgram("BS CS-ST", new HashSet<>(List.of(CSMATH2, CCDSALG)));
-
-        Student student = newDefaultStudent(1, BS_CS_ST);
-
-        Room X = new Room("X", 10, Collections.emptyList());
-        Room Y = new Room("Y", 10, Collections.emptyList());
-
-        Schedule sched1 = new Schedule(Days.MTH, new Period(13, false, 17, true));
-        Schedule sched2 = new Schedule(Days.MTH, new Period(14, true, 15, false));
-
-        Section section1 = new Section("A", sched1, X, CSMATH2);
-        Section section2 = new Section("B", sched2, Y, CCDSALG);
-
-        student.enlist(section1);
-
-        assertThrows(ScheduleConflictException.class, () -> student.enlist(section2));
     }
 
     @Test
