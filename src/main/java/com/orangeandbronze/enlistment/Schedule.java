@@ -28,7 +28,7 @@ class Schedule {
             return false;
         }
 
-        return period.overlaps(other.getPeriod());
+        return period.overlapsWith(other.getPeriod());
     }
 
     Days getDays() {

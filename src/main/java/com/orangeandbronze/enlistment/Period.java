@@ -40,7 +40,7 @@ class Period {
      * @param other     The other period to check for overlap with
      * @return          true if there is overlap, false otherwise
      */
-    boolean overlaps(Period other) {
+    boolean overlapsWith(Period other) {
         int start = this.getStart();
         int end = this.getEnd();
         int otherStart = other.getStart();

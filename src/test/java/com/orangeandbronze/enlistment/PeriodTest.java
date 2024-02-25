@@ -9,7 +9,7 @@ class PeriodTest {
         var period1 = new Period(8, true, 10, false);
         var period2 = new Period(11, false, 11, true);
 
-        assertFalse(period1.overlaps(period2));
+        assertFalse(period1.overlapsWith(period2));
     }
 
     @Test
@@ -17,7 +17,7 @@ class PeriodTest {
         var period1 = new Period(14, false, 15, true);
         var period2 = new Period(15, false, 16, true);
 
-        assertFalse(period1.overlaps(period2));
+        assertFalse(period1.overlapsWith(period2));
     }
 
     @Test
@@ -25,15 +25,15 @@ class PeriodTest {
         var period1 = new Period(8, true, 10, false);
         var period2 = new Period(8, true, 10, false);
 
-        assertTrue(period1.overlaps(period2));
+        assertTrue(period1.overlapsWith(period2));
     }
 
     @Test
-    void overlapping_but_unqeual_periods() {
+    void overlapping_but_unequal_periods() {
         var period1 = new Period(8, true, 10, false);
         var period2 = new Period(9, true, 11, false);
 
-        assertTrue(period1.overlaps(period2));
+        assertTrue(period1.overlapsWith(period2));
     }
 
     @Test
@@ -41,6 +41,6 @@ class PeriodTest {
         var period1 = new Period(8, true, 11, false);
         var period2 = new Period(9, true, 10, false);
 
-        assertTrue(period1.overlaps(period2));
+        assertTrue(period1.overlapsWith(period2));
     }
 }
